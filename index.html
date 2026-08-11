@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#071c17">
+  <meta name="description"
+        content="Know About Islam — Quran, Adhkar, Hadith, Fiqh and Islamic learning.">
+
+  <title>Know About Islam| Quran • Adhkar • Hadith • Fiqh</title>
+
+  <link rel="manifest" href="manifest.json">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <div class="brand">
+    <div class="brand-icon">☪</div>
+
+    <div>
+      <h1>Know About Islam</h1>
+      <span>Your daily path to knowledge</span>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">☀️</button>
+    <button id="menuBtn" class="icon-btn mobile-menu" aria-label="Open menu">☰</button>
+  </div>
+
+</header>
+
+
+<nav id="sidebar" class="sidebar">
+
+  <button class="nav-item active" data-section="home">
+    <span>🏠</span>
+    <span>Home</span>
+  </button>
+
+  <button class="nav-item" data-section="quran">
+    <span>📖</span>
+    <span>Quran</span>
+  </button>
+
+  <button class="nav-item" data-section="adhkar">
+    <span>🤲</span>
+    <span>Adhkar</span>
+  </button>
+
+  <button class="nav-item" data-section="hadith">
+    <span>📜</span>
+    <span>Hadith</span>
+  </button>
+
+  <button class="nav-item" data-section="fiqh">
+    <span>🕌</span>
+    <span>Fiqh & Sunnah</span>
+  </button>
+
+<button class="nav-item" data-section="quiz">
+  <span>🎯</span>
+  <span>Islamic Quiz</span>
+</button>
+
+
+  <button class="nav-item" data-section="principles">
+    <span>📚</span>
+    <span>Principles</span>
+  </button>
+
+  <button class="nav-item" data-section="tasbih">
+    <span>🧮</span>
+    <span>Tasbih</span>
+  </button>
+
+  <button class="nav-item" data-section="bookmarks">
+    <span>🔖</span>
+    <span>Bookmarks</span>
+  </button>
+
+</nav>
+
+
+<main class="main-content">
+
+  <!-- HOME -->
+
+  <section id="home" class="page active-page">
+
+    <div class="hero">
+
+      <div>
+        <p class="eyebrow">ASSALAMU ALAIKUM</p>
+
+        <h2>
+          Strengthen your connection
+          <span>with Allah.</span>
+        </h2>
+
+        <p class="hero-text">
+          Read the Quran, remember Allah, learn authentic teachings,
+          and explore Islamic knowledge every day.
+        </p>
+
+        <button class="primary-btn" data-go="quran">
+          Continue Reading →
+        </button>
+      </div>
+
+      <div class="crescent">☪</div>
+
+    </div>
+
+
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">TODAY</p>
+        <h2>Your Spiritual Journey</h2>
+      </div>
+    </div>
+
+
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <div class="stat-icon">📖</div>
+        <div>
+          <strong id="quranProgress">0</strong>
+          <span>Quran verses</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">🤲</div>
+        <div>
+          <strong id="adhkarProgress">0%</strong>
+          <span>Adhkar completed</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">📚</div>
+        <div>
+          <strong id="lessonProgress">0</strong>
+          <span>Lessons completed</span>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">🔥</div>
+        <div>
+          <strong id="streak">1</strong>
+          <span>Day streak</span>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="content-grid">
+
+      <article class="daily-card">
+
+        <div class="card-label">🌙 AYAH OF THE DAY</div>
+
+        <div class="arabic large-arabic">
+          إِنَّ مَعَ الْعُسْرِ يُسْرًا
+        </div>
+
+        <p class="translation">
+          “Indeed, with hardship comes ease.”
+        </p>
+
+        <small>Surah Ash-Sharh 94:6</small>
+
+        <button
+          class="text-btn"
+          data-go="quran">
+          Read Quran →
+        </button>
+
+      </article>
+
+
+      <article class="daily-card">
+
+        <div class="card-label">📜 HADITH OF THE DAY</div>
+
+        <h3>Actions are judged by intentions</h3>
+
+        <p class="translation">
+          The Messenger of Allah ﷺ taught that actions are judged
+          according to intentions.
+        </p>
+
+        <small>Sahih al-Bukhari 1; Sahih Muslim 1907</small>
+
+        <button
+          class="text-btn"
+          data-go="hadith">
+          Study Hadith →
+        </button>
+
+      </article>
+
+    </div>
+
+
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">LEARN</p>
+        <h2>Explore Islamic Knowledge</h2>
+      </div>
+    </div>
+
+
+    <div class="learning-grid">
+
+      <button class="learning-card" data-go="principles">
+        <span>☝️</span>
+        <strong>Islamic Principles</strong>
+        <small>Learn the foundations of Islam</small>
+      </button>
+
+      <button class="learning-card" data-go="fiqh">
+        <span>🕌</span>
+        <strong>Fiqh & Sunnah</strong>
+        <small>Explore the four Sunni madhhabs</small>
+      </button>
+
+      <button class="learning-card" data-go="adhkar">
+        <span>🤲</span>
+        <strong>Daily Adhkar</strong>
+        <small>Remember Allah throughout your day</small>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- QURAN -->
+
+  <section id="quran" class="page">
+
+    <div class="page-header">
+      <div>
+        <p class="eyebrow">THE NOBLE QURAN</p>
+        <h2>Quran Reader</h2>
+      </div>
+
+      <button class="secondary-btn" id="bookmarkAyah">
+        🔖 Bookmark
+      </button>
+    </div>
+
+
+    <div class="search-box">
+      <input
+        id="quranSearch"
+        type="search"
+        placeholder="Search Quran..."
+      >
+      <button id="searchQuranBtn">Search</button>
+    </div>
+
+
+    <div id="quranResults" class="quran-list">
+
+      <article class="ayah-card">
+
+        <div class="ayah-top">
+          <span class="ayah-number">1:1</span>
+          <button class="bookmark-small">🔖</button>
+        </div>
+
+        <div class="arabic">
+          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        </div>
+
+        <p>
+          In the name of Allah, the Most Compassionate,
+          the Most Merciful.
+        </p>
+
+        <small>Al-Fatihah 1:1</small>
+
+      </article>
+
+
+      <article class="ayah-card">
+
+        <div class="ayah-top">
+          <span class="ayah-number">94:6</span>
+          <button class="bookmark-small">🔖</button>
+        </div>
+
+        <div class="arabic">
+          إِنَّ مَعَ الْعُسْرِ يُسْرًا
+        </div>
+
+        <p>
+          Indeed, with hardship comes ease.
+        </p>
+
+        <small>Ash-Sharh 94:6</small>
+
+      </article>
+
+    </div>
+
+
+    <div class="info-note">
+      <strong>📌 Source architecture</strong>
+      <p>
+        The production version can connect this reader to an
+        authoritative Quran API for complete chapters,
+        translations, tafsir and audio.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- ADHKAR -->
+
+  <section id="adhkar" class="page">
+
+    <div class="page-header">
+      <div>
+        <p class="eyebrow">REMEMBRANCE OF ALLAH</p>
+        <h2>Daily Adhkar</h2>
+      </div>
+
+      <div class="progress-pill">
+        <span id="adhkarCount">0</span>/3
+      </div>
+    </div>
+
+
+    <div class="category-tabs">
+
+      <button class="category active" data-category="morning">
+        🌅 Morning
+      </button>
+
+      <button class="category" data-category="evening">
+        🌇 Evening
+      </button>
+
+      <button class="category" data-category="sleep">
+        🌙 Before Sleep
+      </button>
+
+    </div>
+
+
+    <div id="adhkarList"></div>
+
+  </section>
+
+
+  <!-- HADITH -->
+
+  <section id="hadith" class="page">
+
+    <div class="page-header">
+
+      <div>
+        <p class="eyebrow">SUNNAH</p>
+        <h2>Hadith Library</h2>
+      </div>
+
+      <button class="secondary-btn" id="randomHadith">
+        🎲 Random
+      </button>
+
+    </div>
+
+
+    <div class="search-box">
+      <input
+        id="hadithSearch"
+        type="search"
+        placeholder="Search hadith..."
+      >
+    </div>
+
+
+    <div id="hadithList"></div>
+
+
+    <div class="info-note">
+      <strong>⚠️ Study responsibly</strong>
+      <p>
+        Hadith should be studied with their context, grading,
+        scholarly explanations and principles of fiqh.
+        A single hadith should not automatically be treated
+        as an independent fatwa.
+      </p>
+    </div>
+
+  </section>
+
+
+  <!-- FIQH -->
+
+  <section id="fiqh" class="page">
+
+    <div class="page-header">
+
+      <div>
+        <p class="eyebrow">ISLAMIC JURISPRUDENCE</p>
+        <h2>Fiqh & Sunnah</h2>
+      </div>
+
+    </div>
+
+
+    <div class="madhhab-grid">
+
+      <button class="madhhab active" data-madhhab="all">
+        <strong>All</strong>
+        <small>Compare positions</small>
+      </button>
+
+      <button class="madhhab" data-madhhab="hanafi">
+        <strong>Hanafi</strong>
+        <small>Abu Hanifah</small>
+      </button>
+
+      <button class="madhhab" data-madhhab="maliki">
+        <strong>Maliki</strong>
+        <small>Imam Malik</small>
+      </button>
+
+      <button class="madhhab" data-madhhab="shafii">
+        <strong>Shafi'i</strong>
+        <small>Imam al-Shafi'i</small>
+      </button>
+
+      <button class="madhhab" data-madhhab="hanbali">
+        <strong>Hanbali</strong>
+        <small>Ahmad ibn Hanbal</small>
+      </button>
+
+    </div>
+
+
+    <div id="fiqhList"></div>
+
+
+    <div class="warning-card">
+
+      <strong>📚 Important scholarly note</strong>
+
+      <p>
+        The four Sunni madhhabs are established schools of
+        jurisprudence with detailed methodologies. This app
+        presents differences respectfully and should not replace
+        qualified scholarly guidance for personal fatwas.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- PRINCIPLES -->
+
+  <section id="principles" class="page">
+
+    <div class="page-header">
+      <div>
+        <p class="eyebrow">LEARNING</p>
+        <h2>Islamic Principles</h2>
+      </div>
+    </div>
+
+
+    <div id="principlesList" class="lesson-grid"></div>
+
+  </section>
+
+<!-- QUIZ -->
+
+<section id="quiz" class="page">
+
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">TEST YOUR KNOWLEDGE</p>
+      <h2>Islamic Quiz</h2>
+    </div>
+  </div>
+
+  <div id="quizHome">
+
+    <div class="quiz-intro">
+      <div class="quiz-icon">🎯</div>
+
+      <h3>Islamic Knowledge Challenge</h3>
+
+      <p>
+        Test and improve your knowledge of the Qur'an,
+        Hadith, Seerah, Fiqh and general Islamic knowledge.
+      </p>
+    </div>
+
+    <div class="quiz-categories">
+
+      <button class="quiz-category" data-quiz="quran">
+        <span>📖</span>
+        <strong>Qur'an</strong>
+        <small>Quranic knowledge</small>
+      </button>
+
+      <button class="quiz-category" data-quiz="hadith">
+        <span>📜</span>
+        <strong>Hadith</strong>
+        <small>Sunnah & Hadith</small>
+      </button>
+
+      <button class="quiz-category" data-quiz="seerah">
+        <span>🕋</span>
+        <strong>Seerah</strong>
+        <small>Life of the Prophet ﷺ</small>
+      </button>
+
+      <button class="quiz-category" data-quiz="fiqh">
+        <span>🕌</span>
+        <strong>Fiqh</strong>
+        <small>Islamic jurisprudence</small>
+      </button>
+
+      <button class="quiz-category" data-quiz="general">
+        <span>🌙</span>
+        <strong>General Islam</strong>
+        <small>General knowledge</small>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div id="quizGame" class="quiz-game hidden">
+
+    <div class="quiz-top">
+
+      <button id="backToQuiz">
+        ← Categories
+      </button>
+
+      <span id="quizProgress">
+        Question 1/10
+      </span>
+
+      <span id="quizScore">
+        Score: 0
+      </span>
+
+    </div>
+
+
+    <div class="quiz-progress-bar">
+      <div id="quizProgressFill"></div>
+    </div>
+
+
+    <article class="question-card">
+
+      <span id="quizCategoryLabel">
+        QUR'AN
+      </span>
+
+      <h3 id="quizQuestion">
+        Question goes here
+      </h3>
+
+      <div id="quizOptions"></div>
+
+      <div id="quizFeedback"></div>
+
+      <button
+        id="nextQuestion"
+        class="primary-btn quiz-next hidden">
+        Next Question →
+      </button>
+
+    </article>
+
+  </div>
+
+
+  <div id="quizResult" class="quiz-result hidden">
+
+    <div class="result-icon">🏆</div>
+
+    <p class="eyebrow">QUIZ COMPLETE</p>
+
+    <h2 id="finalScore">80/100</h2>
+
+    <p id="resultMessage">
+      Excellent work!
+    </p>
+
+    <div class="result-stats">
+
+      <div>
+        <strong id="correctAnswers">8</strong>
+        <small>Correct</small>
+      </div>
+
+      <div>
+        <strong id="wrongAnswers">2</strong>
+        <small>Wrong</small>
+      </div>
+
+      <div>
+        <strong id="percentage">80%</strong>
+        <small>Score</small>
+      </div>
+
+    </div>
+
+    <button
+      id="restartQuiz"
+      class="primary-btn">
+      Try Another Quiz
+    </button>
+
+  </div>
+
+</section>
+
+  <!-- TASBIH -->
+
+  <section id="tasbih" class="page">
+
+    <div class="tasbih-container">
+
+      <p class="eyebrow">DHIKR COUNTER</p>
+
+      <h2>Digital Tasbih</h2>
+
+      <div class="tasbih-circle">
+
+        <span id="tasbihNumber">0</span>
+
+        <small>SUBHANALLAH</small>
+
+      </div>
+
+      <button id="tasbihButton" class="tasbih-button">
+        TAP
+      </button>
+
+      <button id="resetTasbih" class="secondary-btn">
+        Reset
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- BOOKMARKS -->
+
+  <section id="bookmarks" class="page">
+
+    <div class="page-header">
+
+      <div>
+        <p class="eyebrow">SAVED CONTENT</p>
+        <h2>Your Bookmarks</h2>
+      </div>
+
+    </div>
+
+    <div id="bookmarkList" class="bookmark-list">
+
+      <div class="empty-state">
+        <span>🔖</span>
+        <h3>No bookmarks yet</h3>
+        <p>
+          Save Quran verses and lessons you want to revisit.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <div>
+    <strong>Know About Islam</strong>
+    <p>Quran • Adhkar • Hadith • Fiqh • Learning</p>
+  </div>
+
+  <small>
+    Built with knowledge, humility and respect.
+  </small>
+
+</footer>
+
+
+<script src="app.js"></script>
+
+</body>
+</html>

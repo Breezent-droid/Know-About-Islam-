@@ -1,0 +1,11 @@
+{}{
+  "name": "Know About Islam",
+  "short_name": "Know About Islam",
+  "description": "Quran, Adhkar, Hadith, Fiqh and Islamic learning.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#071411",
+  "theme_color": "#0c6b50",
+  "orientation": "portrait",
+  "icons": []
+}
