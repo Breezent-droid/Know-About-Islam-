@@ -250,82 +250,109 @@
 
   </section>
 
-<!-- QURAN -->
-  
+  <!-- QURAN -->
+
 <section id="quran" class="page">
 
   <div class="page-header">
+
     <div>
       <p class="eyebrow">THE NOBLE QURAN</p>
+
       <h2>Quran Reader</h2>
+
       <p class="page-subtitle">
-        Read, listen and explore the complete Qur'an.
+        Read, search and listen to the Noble Qur'an.
       </p>
-    </div>
-  </div>
-
-  <div class="quran-controls">
-
-    <div class="search-box">
-      <input
-        id="quranSearch"
-        type="search"
-        placeholder="Search Surah or verse..."
-        autocomplete="off"
-      >
-      <button id="searchQuranBtn">
-        🔍 Search
-      </button>
-    </div>
-
-    <div class="quran-select-row">
-
-      <label for="surahSelect">
-        Select Surah
-      </label>
-
-      <select id="surahSelect">
-        <option value="">
-          Choose a Surah...
-        </option>
-      </select>
-
-    </div>
-
-  </div>
-
-  <div id="quranStatus" class="info-note">
-    📖 Loading Qur'an...
-  </div>
-
-  <div id="quranSurahInfo" class="quran-surah-info hidden">
-
-    <div>
-      <span id="quranSurahNumber"></span>
-      <h3 id="quranSurahName"></h3>
-      <p id="quranSurahDetails"></p>
     </div>
 
     <button
-      id="playSurahBtn"
-      class="primary-btn"
-      type="button">
-      ▶ Play Surah
+      class="secondary-btn"
+      id="bookmarkAyah">
+      🔖 Bookmark
     </button>
 
   </div>
 
+
+  <div class="search-box">
+
+    <input
+      id="quranSearch"
+      type="search"
+      placeholder="Search Quran..."
+      autocomplete="off"
+    >
+
+    <button id="searchQuranBtn">
+      Search
+    </button>
+
+  </div>
+
+
+  <div class="quran-selector">
+
+    <label for="surahSelect">
+      📖 Select Surah
+    </label>
+
+    <select id="surahSelect">
+
+      <option value="">
+        Loading Surahs...
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <div
+    id="quranStatus"
+    class="info-note">
+
+    📖 Loading the 114 Surahs...
+
+  </div>
+
+
+  <div
+    id="quranSurahInfo"
+    class="info-note hidden">
+
+    <span
+      id="quranSurahNumber">
+    </span>
+
+    <h3 id="quranSurahName"></h3>
+
+    <p id="quranSurahDetails"></p>
+
+    <button
+      id="playSurahBtn"
+      class="secondary-btn"
+      type="button">
+
+      ▶ Play Surah
+
+    </button>
+
+  </div>
+
+
   <audio
     id="quranAudio"
-    controls
-    preload="none"
-    class="quran-audio hidden">
+    class="hidden"
+    controls>
   </audio>
+
 
   <div
     id="quranResults"
     class="quran-list">
   </div>
+
 
 </section>
 
