@@ -250,88 +250,84 @@
 
   </section>
 
+<!-- QURAN -->
+  
+<section id="quran" class="page">
 
-  <!-- QURAN -->
-
-  <section id="quran" class="page">
-
-    <div class="page-header">
-      <div>
-        <p class="eyebrow">THE NOBLE QURAN</p>
-        <h2>Quran Reader</h2>
-      </div>
-
-      <button class="secondary-btn" id="bookmarkAyah">
-        🔖 Bookmark
-      </button>
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">THE NOBLE QURAN</p>
+      <h2>Quran Reader</h2>
+      <p class="page-subtitle">
+        Read, listen and explore the complete Qur'an.
+      </p>
     </div>
+  </div>
 
+  <div class="quran-controls">
 
     <div class="search-box">
       <input
         id="quranSearch"
         type="search"
-        placeholder="Search Quran..."
+        placeholder="Search Surah or verse..."
+        autocomplete="off"
       >
-      <button id="searchQuranBtn">Search</button>
+      <button id="searchQuranBtn">
+        🔍 Search
+      </button>
     </div>
 
+    <div class="quran-select-row">
 
-    <div id="quranResults" class="quran-list">
+      <label for="surahSelect">
+        Select Surah
+      </label>
 
-      <article class="ayah-card">
-
-        <div class="ayah-top">
-          <span class="ayah-number">1:1</span>
-          <button class="bookmark-small">🔖</button>
-        </div>
-
-        <div class="arabic">
-          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-        </div>
-
-        <p>
-          In the name of Allah, the Most Compassionate,
-          the Most Merciful.
-        </p>
-
-        <small>Al-Fatihah 1:1</small>
-
-      </article>
-
-
-      <article class="ayah-card">
-
-        <div class="ayah-top">
-          <span class="ayah-number">94:6</span>
-          <button class="bookmark-small">🔖</button>
-        </div>
-
-        <div class="arabic">
-          إِنَّ مَعَ الْعُسْرِ يُسْرًا
-        </div>
-
-        <p>
-          Indeed, with hardship comes ease.
-        </p>
-
-        <small>Ash-Sharh 94:6</small>
-
-      </article>
+      <select id="surahSelect">
+        <option value="">
+          Choose a Surah...
+        </option>
+      </select>
 
     </div>
 
+  </div>
 
-    <div class="info-note">
-      <strong>📌 Source architecture</strong>
-      <p>
-        The production version can connect this reader to an
-        authoritative Quran API for complete chapters,
-        translations, tafsir and audio.
-      </p>
+  <div id="quranStatus" class="info-note">
+    📖 Loading Qur'an...
+  </div>
+
+  <div id="quranSurahInfo" class="quran-surah-info hidden">
+
+    <div>
+      <span id="quranSurahNumber"></span>
+      <h3 id="quranSurahName"></h3>
+      <p id="quranSurahDetails"></p>
     </div>
 
-  </section>
+    <button
+      id="playSurahBtn"
+      class="primary-btn"
+      type="button">
+      ▶ Play Surah
+    </button>
+
+  </div>
+
+  <audio
+    id="quranAudio"
+    controls
+    preload="none"
+    class="quran-audio hidden">
+  </audio>
+
+  <div
+    id="quranResults"
+    class="quran-list">
+  </div>
+
+</section>
 
 
   <!-- ADHKAR -->
