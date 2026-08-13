@@ -849,7 +849,7 @@ document
 
     bookmarks.splice(index, 1);
 
-    localStorage.setItem(o
+    localStorage.setItem(
       "bookmarks",
       JSON.stringify(bookmarks)
     );
