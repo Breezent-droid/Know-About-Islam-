@@ -876,17 +876,18 @@ document
 const QURAN_API =
   "https://api.alquran.cloud/v1";
 
-const quranSearchInput =
+
+const quranSearch =
   document.getElementById("quranSearch");
 
-const quranSearchBtn =
+const searchQuranBtn =
   document.getElementById("searchQuranBtn");
-
-const surahSelect =
-  document.getElementById("surahSelect");
 
 const quranResults =
   document.getElementById("quranResults");
+
+const surahSelect =
+  document.getElementById("surahSelect");
 
 const quranStatus =
   document.getElementById("quranStatus");
@@ -910,12 +911,10 @@ const quranAudio =
   document.getElementById("quranAudio");
 
 
-let quranSurahs = [];
-
-let currentSurah = null;
+let currentQuranSurah = null;
 
 
-/* ---------- LOAD SURAH LIST ---------- */
+/* ---------- LOAD 114 SURAHS ---------- */
 
 async function loadQuranSurahs() {
 
@@ -924,43 +923,57 @@ async function loadQuranSurahs() {
     quranStatus.textContent =
       "📖 Loading the 114 Surahs...";
 
+
     const response =
       await fetch(
         `${QURAN_API}/surah`
       );
 
+
     if (!response.ok) {
+
       throw new Error(
-        "Unable to load Surahs."
+        "Could not load Surahs."
       );
+
     }
+
 
     const result =
       await response.json();
 
-    quranSurahs =
-      result.data || [];
 
     surahSelect.innerHTML = `
       <option value="">
-        Choose a Surah...
+        Select a Surah...
       </option>
     `;
 
-    quranSurahs.forEach(surah => {
 
-      const option =
-        document.createElement("option");
+    result.data.forEach(
+      surah => {
 
-      option.value =
-        surah.number;
+        const option =
+          document.createElement(
+            "option"
+          );
 
-      option.textContent =
-        `${surah.number}. ${surah.englishName} — ${surah.name}`;
 
-      surahSelect.appendChild(option);
+        option.value =
+          surah.number;
 
-    });
+
+        option.textContent =
+          `${surah.number}. ${surah.englishName} — ${surah.name}`;
+
+
+        surahSelect.appendChild(
+          option
+        );
+
+      }
+    );
+
 
     quranStatus.textContent =
       "📖 Select a Surah to begin reading.";
@@ -968,274 +981,115 @@ async function loadQuranSurahs() {
   } catch (error) {
 
     console.error(
-      "Quran Surah loading error:",
+      "Quran Surah error:",
       error
     );
 
+
     quranStatus.textContent =
-      "⚠️ Unable to load the Qur'an right now. Please check your internet connection and try again.";
+      "⚠️ Qur'an could not be loaded. Please check your internet connection.";
 
   }
 
 }
 
 
-/* ---------- LOAD SURAH ---------- */
+/* ---------- LOAD COMPLETE SURAH ---------- */
 
-async function loadSurah(surahNumber) {
+async function loadQuranSurah(
+  surahNumber
+) {
 
   if (!surahNumber) return;
+
 
   try {
 
     quranStatus.textContent =
       "📖 Loading Surah...";
 
-    quranResults.innerHTML = "";
+
+    quranResults.innerHTML =
+      "";
+
 
     quranSurahInfo.classList.add(
       "hidden"
     );
 
+
     quranAudio.classList.add(
       "hidden"
     );
+
 
     const response =
       await fetch(
         `${QURAN_API}/surah/${surahNumber}/editions/quran-uthmani,en.sahih`
       );
 
+
     if (!response.ok) {
+
       throw new Error(
-        "Unable to load Surah."
+        "Could not load Surah."
       );
+
     }
+
 
     const result =
       await response.json();
 
-    const editions =
-      result.data || [];
 
-    const arabicEdition =
-      editions.find(
-        edition =>
-          edition.identifier ===
-          "quran-uthmani"
-      );
+    const arabic =
+      result.data[0];
 
-    const translationEdition =
-      editions.find(
-        edition =>
-          edition.identifier ===
-          "en.sahih"
-      );
-
-    if (
-      !arabicEdition ||
-      !translationEdition
-    ) {
-
-      throw new Error(
-        "Quran editions unavailable."
-      );
-
-    }
-
-    currentSurah = {
-      arabic: arabicEdition,
-      translation:
-        translationEdition
-    };
-
-    renderQuranSurah(
-      arabicEdition,
-      translationEdition
-    );
-
-    quranStatus.textContent =
-      `📖 ${arabicEdition.englishName} loaded successfully.`;
-
-  } catch (error) {
-
-    console.error(
-      "Quran loading error:",
-      error
-    );
-
-    quranStatus.textContent =
-      "⚠️ Unable to load this Surah. Please try again.";
-
-  }
-
-}
+    const translation =
+      result.data[1];
 
 
-/* ---------- RENDER SURAH ---------- */
-
-function renderQuranSurah(
-  arabicEdition,
-  translationEdition
-) {
-
-  quranResults.innerHTML = "";
-
-  quranSurahInfo.classList.remove(
-    "hidden"
-  );
-
-  quranSurahNumber.textContent =
-    `Surah ${arabicEdition.number}`;
-
-  quranSurahName.textContent =
-    `${arabicEdition.englishName} — ${arabicEdition.name}`;
-
-  quranSurahDetails.textContent =
-    `${arabicEdition.englishNameTranslation} • ${arabicEdition.revelationType} • ${arabicEdition.numberOfAyahs} Ayahs`;
-
-  const arabicAyahs =
-    arabicEdition.ayahs || [];
-
-  const translationAyahs =
-    translationEdition.ayahs || [];
-
-  arabicAyahs.forEach(
-    (ayah, index) => {
-
-      const translation =
-        translationAyahs[index];
-
-      const card =
-        document.createElement("article");
-
-      card.className =
-        "ayah-card quran-ayah-card";
-
-      const reference =
-        `${arabicEdition.number}:${ayah.numberInSurah}`;
-
-      const translatedText =
-        translation
-          ? translation.text
-          : "";
-
-      card.innerHTML = `
-
-        <div class="ayah-top">
-
-          <span class="ayah-number">
-            ${reference}
-          </span>
-
-          <button
-            class="bookmark-small"
-            type="button"
-            data-quran-bookmark="${reference}">
-            🔖
-          </button>
-
-        </div>
-
-        <div class="arabic quran-arabic">
-
-          ${ayah.text}
-
-        </div>
-
-        <p class="translation quran-translation">
-
-          ${translatedText}
-
-        </p>
-
-        <small>
-          ${arabicEdition.englishName}
-          ${arabicEdition.number}:${ayah.numberInSurah}
-        </small>
-
-      `;
-
-      quranResults.appendChild(
-        card
-      );
-
-    }
-  );
-
-  updateQuranProgress();
-
-}
+    currentQuranSurah =
+      arabic;
 
 
-/* ---------- SEARCH QURAN ---------- */
-
-async function searchQuran() {
-
-  const query =
-    quranSearchInput.value
-      .trim();
-
-  if (!query) {
-
-    quranStatus.textContent =
-      "🔎 Enter a word, phrase or Surah number to search.";
-
-    return;
-
-  }
-
-  try {
-
-    quranStatus.textContent =
-      "🔎 Searching the Qur'an...";
-
-    quranResults.innerHTML = "";
-
-    quranSurahInfo.classList.add(
+    quranSurahInfo.classList.remove(
       "hidden"
     );
 
-    const response =
-      await fetch(
-        `${QURAN_API}/search/${encodeURIComponent(query)}/all/en.sahih`
-      );
 
-    if (!response.ok) {
-      throw new Error(
-        "Search failed."
-      );
-    }
+    quranSurahNumber.textContent =
+      `Surah ${arabic.number}`;
 
-    const result =
-      await response.json();
 
-    const matches =
-      result.data?.matches || [];
+    quranSurahName.textContent =
+      `${arabic.englishName} — ${arabic.name}`;
 
-    if (!matches.length) {
 
-      quranStatus.textContent =
-        "🔎 No matching verses found.";
+    quranSurahDetails.textContent =
+      `${arabic.englishNameTranslation} • ${arabic.revelationType} • ${arabic.numberOfAyahs} Ayahs`;
 
-      return;
 
-    }
+    arabic.ayahs.forEach(
+      (ayah, index) => {
 
-    quranStatus.textContent =
-      `🔎 Found ${matches.length} matching verse${matches.length === 1 ? "" : "s"}.`;
+        const translated =
+          translation.ayahs[index];
 
-    matches.forEach(
-      match => {
 
         const card =
-          document.createElement("article");
+          document.createElement(
+            "article"
+          );
+
 
         card.className =
-          "ayah-card quran-ayah-card";
+          "ayah-card";
+
 
         const reference =
-          `${match.surah.number}:${match.numberInSurah}`;
+          `${arabic.number}:${ayah.numberInSurah}`;
+
 
         card.innerHTML = `
 
@@ -1249,29 +1103,37 @@ async function searchQuran() {
               class="bookmark-small"
               type="button"
               data-quran-bookmark="${reference}">
+
               🔖
+
             </button>
 
           </div>
 
-          <h3>
-            ${match.surah.englishName}
-          </h3>
+
+          <div class="arabic">
+
+            ${ayah.text}
+
+          </div>
+
 
           <p class="translation">
 
-            ${match.text}
+            ${translated.text}
 
           </p>
 
+
           <small>
 
-            ${match.surah.englishName}
+            ${arabic.englishName}
             ${reference}
 
           </small>
 
         `;
+
 
         quranResults.appendChild(
           card
@@ -1280,6 +1142,163 @@ async function searchQuran() {
       }
     );
 
+
+    quranStatus.textContent =
+      `📖 ${arabic.englishName} loaded successfully.`;
+
+  } catch (error) {
+
+    console.error(
+      "Quran loading error:",
+      error
+    );
+
+
+    quranStatus.textContent =
+      "⚠️ Unable to load this Surah. Please try again.";
+
+  }
+
+}
+
+
+/* ---------- SEARCH COMPLETE QURAN ---------- */
+
+async function searchQuran() {
+
+  const query =
+    quranSearch.value
+      .trim();
+
+
+  if (!query) {
+
+    quranStatus.textContent =
+      "🔎 Enter a word or phrase to search.";
+
+    return;
+
+  }
+
+
+  try {
+
+    quranStatus.textContent =
+      "🔎 Searching the Qur'an...";
+
+
+    quranResults.innerHTML =
+      "";
+
+
+    const response =
+      await fetch(
+        `${QURAN_API}/search/${encodeURIComponent(query)}/all/en.sahih`
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        "Search failed."
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    const matches =
+      result.data?.matches || [];
+
+
+    if (!matches.length) {
+
+      quranStatus.textContent =
+        "🔎 No matching verses found.";
+
+      return;
+
+    }
+
+
+    quranStatus.textContent =
+      `🔎 Found ${matches.length} matching verses.`;
+
+
+    matches.forEach(
+      match => {
+
+        const card =
+          document.createElement(
+            "article"
+          );
+
+
+        card.className =
+          "ayah-card";
+
+
+        const reference =
+          `${match.surah.number}:${match.numberInSurah}`;
+
+
+        card.innerHTML = `
+
+          <div class="ayah-top">
+
+            <span class="ayah-number">
+
+              ${reference}
+
+            </span>
+
+            <button
+              class="bookmark-small"
+              type="button"
+              data-quran-bookmark="${reference}">
+
+              🔖
+
+            </button>
+
+          </div>
+
+
+          <h3>
+
+            ${match.surah.englishName}
+
+          </h3>
+
+
+          <p class="translation">
+
+            ${match.text}
+
+          </p>
+
+
+          <small>
+
+            Surah ${match.surah.number}
+            : Ayah ${match.numberInSurah}
+
+          </small>
+
+        `;
+
+
+        quranResults.appendChild(
+          card
+        );
+
+      }
+    );
+
+
   } catch (error) {
 
     console.error(
@@ -1287,41 +1306,96 @@ async function searchQuran() {
       error
     );
 
+
     quranStatus.textContent =
-      "⚠️ Search is temporarily unavailable. Please try again.";
+      "⚠️ Quran search is temporarily unavailable.";
 
   }
 
 }
 
 
-/* ---------- SURAH AUDIO ---------- */
+/* ---------- PLAY SURAH ---------- */
 
-function playSelectedSurah() {
+function playSelectedQuranSurah() {
 
-  if (!currentSurah) return;
+  if (!currentQuranSurah) {
 
-  const surahNumber =
-    currentSurah.arabic.number;
+    return;
+
+  }
+
 
   quranAudio.src =
-    `https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${surahNumber}.mp3`;
+    `https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${currentQuranSurah.number}.mp3`;
+
 
   quranAudio.classList.remove(
     "hidden"
   );
 
+
   quranAudio.play()
-    .catch(error => {
+    .catch(
+      error => {
 
-      console.log(
-        "Audio playback requires user interaction.",
-        error
-      );
+        console.log(
+          "Audio playback:",
+          error
+        );
 
-    });
+      }
+    );
 
 }
+
+
+/* ---------- SURAH SELECT ---------- */
+
+surahSelect.addEventListener(
+  "change",
+  event => {
+
+    loadQuranSurah(
+      event.target.value
+    );
+
+  }
+);
+
+
+/* ---------- QURAN SEARCH BUTTON ---------- */
+
+searchQuranBtn.addEventListener(
+  "click",
+  searchQuran
+);
+
+
+/* ---------- ENTER TO SEARCH ---------- */
+
+quranSearch.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key === "Enter"
+    ) {
+
+      searchQuran();
+
+    }
+
+  }
+);
+
+
+/* ---------- AUDIO BUTTON ---------- */
+
+playSurahBtn.addEventListener(
+  "click",
+  playSelectedQuranSurah
+);
 
 
 /* ---------- QURAN BOOKMARKS ---------- */
@@ -1335,131 +1409,46 @@ document.addEventListener(
         "[data-quran-bookmark]"
       );
 
+
     if (!button) return;
+
 
     const reference =
       button.dataset.quranBookmark;
 
-    let quranBookmarks =
-      JSON.parse(
-        localStorage.getItem(
-          "quranBookmarks"
-        )
-      ) || [];
 
-    if (
-      quranBookmarks.includes(
-        reference
-      )
-    ) {
-
-      quranBookmarks =
-        quranBookmarks.filter(
-          item =>
-            item !== reference
-        );
-
-      button.textContent =
-        "🔖";
-
-    } else {
-
-      quranBookmarks.push(
-        reference
+    const ayahCard =
+      button.closest(
+        ".ayah-card"
       );
 
-      button.textContent =
-        "🔖✓";
 
-    }
+    const translation =
+      ayahCard
+        ?.querySelector(
+          ".translation"
+        )
+        ?.textContent
+        ?.trim() ||
+      `Quran verse ${reference}`;
 
-    localStorage.setItem(
-      "quranBookmarks",
-      JSON.stringify(
-        quranBookmarks
-      )
+
+    saveBookmark(
+      `Quran ${reference}`,
+      translation
     );
+
+
+    button.textContent =
+      "🔖✓";
 
   }
 );
 
 
-/* ---------- QURAN EVENTS ---------- */
-
-surahSelect
-  ?.addEventListener(
-    "change",
-    event => {
-
-      loadSurah(
-        event.target.value
-      );
-
-    }
-  );
-
-
-quranSearchBtn
-  ?.addEventListener(
-    "click",
-    searchQuran
-  );
-
-
-quranSearchInput
-  ?.addEventListener(
-    "keydown",
-    event => {
-
-      if (
-        event.key === "Enter"
-      ) {
-
-        searchQuran();
-
-      }
-
-    }
-  );
-
-
-playSurahBtn
-  ?.addEventListener(
-    "click",
-    playSelectedSurah
-  );
-
-
-/* ---------- QURAN PROGRESS ---------- */
-
-function updateQuranProgress() {
-
-  const count =
-    JSON.parse(
-      localStorage.getItem(
-        "quranBookmarks"
-      )
-    ) || [];
-
-  const element =
-    document.getElementById(
-      "quranProgress"
-    );
-
-  if (element) {
-
-    element.textContent =
-      count.length;
-
-  }
-
-}
-
-
 /* ---------- START QURAN ---------- */
 
 loadQuranSurahs();
-updateQuranProgress();
 
 /* ---------- HOME STATISTICS ---------- */
 
