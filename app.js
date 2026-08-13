@@ -871,7 +871,7 @@ document
   });
 
 
-/* ---------- QURAN READER ---------- */
+/* ---------- QURAN READER - updated---------- */
 
 const QURAN_API =
   "https://api.alquran.cloud/v1";
