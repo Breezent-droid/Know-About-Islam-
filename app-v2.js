@@ -877,6 +877,7 @@ if (
   document.readyState === "loading"
 ) {
 
+
   document.addEventListener(
     "DOMContentLoaded",
     kaiInitializeV2
@@ -887,3 +888,170 @@ if (
   kaiInitializeV2();
 
 }
+
+/* =========================================================
+   HADITH LIBRARY — V2
+   ========================================================= */
+
+(function initHadithLibrary() {
+
+    function renderHadith() {
+
+        const list = document.getElementById("hadith-list");
+        const searchInput = document.getElementById("hadith-search");
+        const categorySelect = document.getElementById("hadith-category");
+
+        if (!list || !searchInput || !categorySelect) return;
+
+        const searchTerm = searchInput.value
+            .trim()
+            .toLowerCase();
+
+        const selectedCategory = categorySelect.value;
+
+        const results = (window.hadithData || []).filter(hadith => {
+
+            const searchableText = [
+                hadith.collection,
+                hadith.book,
+                hadith.narrator,
+                hadith.topic,
+                hadith.english,
+                hadith.arabic,
+                hadith.reference
+            ]
+            .join(" ")
+            .toLowerCase();
+
+            const matchesSearch =
+                !searchTerm ||
+                searchableText.includes(searchTerm);
+
+            const matchesCategory =
+                selectedCategory === "all" ||
+                hadith.topic === selectedCategory;
+
+            return matchesSearch && matchesCategory;
+        });
+
+        if (results.length === 0) {
+            list.innerHTML = `
+                <div class="progress-card" style="text-align:center;padding:25px;">
+                    <h3>🔎 No Hadith found</h3>
+                    <p style="color:var(--muted);margin-top:8px;">
+                        Try another search or topic.
+                    </p>
+                </div>
+            `;
+            return;
+        }
+
+        list.innerHTML = results.map(hadith => `
+            <article class="progress-card hadith-card"
+                style="margin-bottom:16px;padding:20px;">
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    gap:10px;
+                    flex-wrap:wrap;
+                    margin-bottom:12px;
+                ">
+                    <strong>📚 ${hadith.collection}</strong>
+
+                    <span style="
+                        color:var(--muted);
+                        font-size:.85rem;
+                    ">
+                        ${hadith.reference}
+                    </span>
+                </div>
+
+                <div style="
+                    color:var(--muted);
+                    font-size:.9rem;
+                    margin-bottom:14px;
+                ">
+                    ${hadith.book} • ${hadith.topic}
+                </div>
+
+                <div dir="rtl" style="
+                    font-size:1.35rem;
+                    line-height:2;
+                    margin:18px 0;
+                    text-align:right;
+                ">
+                    ${hadith.arabic}
+                </div>
+
+                <div style="
+                    line-height:1.7;
+                    margin-bottom:16px;
+                ">
+                    ${hadith.english}
+                </div>
+
+                <div style="
+                    border-top:1px solid var(--border);
+                    padding-top:12px;
+                    color:var(--muted);
+                    font-size:.88rem;
+                ">
+                    <div>
+                        👤 <strong>Narrator:</strong>
+                        ${hadith.narrator}
+                    </div>
+
+                    <div style="margin-top:6px;">
+                        ⭐ <strong>Grade:</strong>
+                        ${hadith.grade}
+                    </div>
+                </div>
+
+            </article>
+        `).join("");
+    }
+
+    function setupHadith() {
+
+        const searchInput =
+            document.getElementById("hadith-search");
+
+        const categorySelect =
+            document.getElementById("hadith-category");
+
+        if (!searchInput || !categorySelect) return;
+
+        searchInput.addEventListener(
+            "input",
+            renderHadith
+        );
+
+        categorySelect.addEventListener(
+            "change",
+            renderHadith
+        );
+
+        renderHadith();
+
+        console.log(
+            `KAI V2: Hadith library loaded — ${
+                (window.hadithData || []).length
+            } Hadith`
+        );
+    }
+
+    if (document.readyState === "loading") {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            setupHadith
+        );
+
+    } else {
+
+        setupHadith();
+
+    }
+
+})();
