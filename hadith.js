@@ -3,7 +3,7 @@
 // KNOW ABOUT ISLAM — HADITH DATABASE
 // ============================================
 
-const hadithData = [
+window.hadithData = [
 
   {
     id: 1,
