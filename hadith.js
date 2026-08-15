@@ -78,3 +78,5 @@ window.hadithData = hadithData;
 console.log(
   `Hadith database loaded successfully: ${hadithData.length} hadith`
 );
+
+window.hadithData = hadithData;
