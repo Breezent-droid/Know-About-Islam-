@@ -1204,12 +1204,67 @@
         class="section"
         id="hadith"
       >
-        <div class="progress-card">
-          <h3>📜 Hadith</h3>
-          <p style="color:var(--muted);margin-top:7px;">
-            Hadith library coming into V2.
-          </p>
+      <div class="progress-card" style="padding:20px;">
+
+    <h2 style="margin-bottom:8px;">
+        📜 Hadith Library
+    </h2>
+
+    <p style="color:var(--muted);margin-bottom:18px;">
+        Explore authentic Hadith with references, narrators and topics.
+    </p>
+
+    <!-- SEARCH -->
+    <input
+        type="search"
+        id="hadith-search"
+        placeholder="🔎 Search Hadith..."
+        style="
+            width:100%;
+            padding:13px;
+            border-radius:12px;
+            border:1px solid var(--border);
+            background:var(--card);
+            color:var(--text);
+            margin-bottom:12px;
+        "
+    >
+
+    <!-- CATEGORY -->
+    <select
+        id="hadith-category"
+        style="
+            width:100%;
+            padding:13px;
+            border-radius:12px;
+            border:1px solid var(--border);
+            background:var(--card);
+            color:var(--text);
+            margin-bottom:20px;
+        "
+    >
+        <option value="all">📚 All Topics</option>
+        <option value="Intentions">Intentions</option>
+        <option value="Islam">Islam</option>
+        <option value="Halal and Haram">Halal & Haram</option>
+        <option value="Purification">Purification</option>
+        <option value="Good Character">Good Character</option>
+    </select>
+
+    <!-- HADITH RESULTS -->
+    <div id="hadith-list">
+
+        <div style="
+            text-align:center;
+            padding:25px;
+            color:var(--muted);
+        ">
+            Loading Hadith...
         </div>
+
+    </div>
+
+</div>
       </section>
 
 
