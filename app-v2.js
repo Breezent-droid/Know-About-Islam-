@@ -890,65 +890,86 @@ if (
 }
 
 /* =========================================================
-   HADITH LIBRARY — V2
+   HADITH LIBRARY — V2 API
    ========================================================= */
 
 (function initHadithLibrary() {
 
-    function renderHadith() {
+    const HADITH_API =
+        "https://randomhadith.com/api";
 
-        const list = document.getElementById("hadith-list");
-        const searchInput = document.getElementById("hadith-search");
-        const categorySelect = document.getElementById("hadith-category");
+    const list =
+        document.getElementById("hadith-list");
 
-        if (!list || !searchInput || !categorySelect) return;
+    const searchInput =
+        document.getElementById("hadith-search");
 
-        const searchTerm = searchInput.value
-            .trim()
-            .toLowerCase();
+    const categorySelect =
+        document.getElementById("hadith-category");
 
-        const selectedCategory = categorySelect.value;
+    if (!list) return;
 
-        const results = (window.hadithData || []).filter(hadith => {
 
-            const searchableText = [
-                hadith.collection,
-                hadith.book,
-                hadith.narrator,
-                hadith.topic,
-                hadith.english,
-                hadith.arabic,
-                hadith.reference
-            ]
-            .join(" ")
-            .toLowerCase();
+    /* ---------------------------------------------------------
+       ESCAPE HTML
+    --------------------------------------------------------- */
 
-            const matchesSearch =
-                !searchTerm ||
-                searchableText.includes(searchTerm);
+    function escapeHTML(value = "") {
 
-            const matchesCategory =
-                selectedCategory === "all" ||
-                hadith.topic === selectedCategory;
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
 
-            return matchesSearch && matchesCategory;
-        });
+    }
 
-        if (results.length === 0) {
+
+    /* ---------------------------------------------------------
+       DISPLAY HADITH
+    --------------------------------------------------------- */
+
+    function displayHadith(hadith) {
+
+        if (!hadith) {
+
             list.innerHTML = `
-                <div class="progress-card" style="text-align:center;padding:25px;">
-                    <h3>🔎 No Hadith found</h3>
+                <div class="progress-card"
+                     style="text-align:center;padding:25px;">
+
+                    <h3>📜 Hadith not found</h3>
+
                     <p style="color:var(--muted);margin-top:8px;">
-                        Try another search or topic.
+                        Please try another Hadith number.
                     </p>
+
                 </div>
             `;
+
             return;
         }
 
-        list.innerHTML = results.map(hadith => `
-            <article class="progress-card hadith-card"
-                style="margin-bottom:16px;padding:20px;">
+
+        const bookmarkId =
+            `hadith-${hadith.id}`;
+
+
+        const saved =
+            typeof kaiIsBookmarked === "function"
+                ? kaiIsBookmarked(bookmarkId)
+                : false;
+
+
+        list.innerHTML = `
+
+            <article
+                class="progress-card hadith-card"
+                style="
+                    margin-bottom:16px;
+                    padding:20px;
+                "
+            >
 
                 <div style="
                     display:flex;
@@ -957,101 +978,423 @@ if (
                     flex-wrap:wrap;
                     margin-bottom:12px;
                 ">
-                    <strong>📚 ${hadith.collection}</strong>
+
+                    <strong>
+                        📚 ${escapeHTML(hadith.book)}
+                    </strong>
 
                     <span style="
                         color:var(--muted);
                         font-size:.85rem;
                     ">
-                        ${hadith.reference}
+                        Hadith ${escapeHTML(hadith.hadith_no)}
                     </span>
+
                 </div>
+
 
                 <div style="
                     color:var(--muted);
                     font-size:.9rem;
                     margin-bottom:14px;
                 ">
-                    ${hadith.book} • ${hadith.topic}
+
+                    Chapter ${escapeHTML(
+                        hadith.chapter_no
+                    )}
+
+                    •
+
+                    ${escapeHTML(
+                        hadith.chapter_name_en
+                    )}
+
                 </div>
 
-                <div dir="rtl" style="
-                    font-size:1.35rem;
-                    line-height:2;
-                    margin:18px 0;
-                    text-align:right;
-                ">
-                    ${hadith.arabic}
+
+                <div
+                    dir="rtl"
+                    style="
+                        font-size:1.35rem;
+                        line-height:2;
+                        margin:20px 0;
+                        text-align:right;
+                    "
+                >
+
+                    ${escapeHTML(hadith.text_ar)}
+
                 </div>
+
 
                 <div style="
-                    line-height:1.7;
-                    margin-bottom:16px;
+                    line-height:1.8;
+                    margin-bottom:18px;
                 ">
-                    ${hadith.english}
+
+                    ${escapeHTML(hadith.text_en)}
+
                 </div>
+
 
                 <div style="
                     border-top:1px solid var(--border);
-                    padding-top:12px;
+                    padding-top:14px;
                     color:var(--muted);
-                    font-size:.88rem;
+                    font-size:.85rem;
                 ">
+
                     <div>
-                        👤 <strong>Narrator:</strong>
-                        ${hadith.narrator}
+                        📖
+                        ${escapeHTML(hadith.book)}
+                        —
+                        Hadith
+                        ${escapeHTML(hadith.hadith_no)}
                     </div>
 
                     <div style="margin-top:6px;">
-                        ⭐ <strong>Grade:</strong>
-                        ${hadith.grade}
+                        📚
+                        Chapter
+                        ${escapeHTML(hadith.chapter_no)}
                     </div>
+
                 </div>
 
+
+                <button
+                    type="button"
+                    class="bookmark-small"
+                    data-api-bookmark
+                    style="
+                        margin-top:15px;
+                        padding:9px 14px;
+                    "
+                >
+                    ${saved ? "🔖 Saved" : "🔖 Save Hadith"}
+                </button>
+
             </article>
-        `).join("");
+
+        `;
+
+
+        const bookmarkButton =
+            list.querySelector(
+                "[data-api-bookmark]"
+            );
+
+
+        if (bookmarkButton) {
+
+            bookmarkButton.addEventListener(
+                "click",
+                () => {
+
+                    if (
+                        typeof kaiAddBookmark ===
+                        "function"
+                    ) {
+
+                        kaiAddBookmark({
+
+                            id: bookmarkId,
+
+                            type: "hadith",
+
+                            title:
+                                `${hadith.book} ${hadith.hadith_no}`,
+
+                            text:
+                                hadith.text_en,
+
+                            arabic:
+                                hadith.text_ar,
+
+                            reference:
+                                `${hadith.book}, Hadith ${hadith.hadith_no}`
+
+                        });
+
+                        bookmarkButton.textContent =
+                            "🔖 Saved";
+
+                    }
+
+                }
+            );
+
+        }
+
     }
 
-    function setupHadith() {
 
-        const searchInput =
-            document.getElementById("hadith-search");
+    /* ---------------------------------------------------------
+       RANDOM HADITH
+    --------------------------------------------------------- */
 
-        const categorySelect =
-            document.getElementById("hadith-category");
+    async function loadRandomHadith() {
 
-        if (!searchInput || !categorySelect) return;
+        list.innerHTML = `
+
+            <div class="progress-card"
+                 style="text-align:center;padding:25px;">
+
+                <h3>📖 Loading Hadith...</h3>
+
+                <p style="color:var(--muted);margin-top:8px;">
+                    Please wait.
+                </p>
+
+            </div>
+
+        `;
+
+
+        try {
+
+            const response =
+                await fetch(HADITH_API);
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Hadith API request failed."
+                );
+
+            }
+
+
+            const hadith =
+                await response.json();
+
+
+            displayHadith(hadith);
+
+
+        } catch (error) {
+
+            console.error(
+                "Hadith API error:",
+                error
+            );
+
+
+            list.innerHTML = `
+
+                <div class="progress-card"
+                     style="text-align:center;padding:25px;">
+
+                    <h3>⚠️ Could not load Hadith</h3>
+
+                    <p style="
+                        color:var(--muted);
+                        margin-top:8px;
+                    ">
+                        Please check your internet
+                        connection and try again.
+                    </p>
+
+                    <button
+                        id="retryHadith"
+                        class="text-btn"
+                        style="margin-top:15px;"
+                    >
+                        🔄 Try Again
+                    </button>
+
+                </div>
+
+            `;
+
+
+            document
+                .getElementById("retryHadith")
+                ?.addEventListener(
+                    "click",
+                    loadRandomHadith
+                );
+
+        }
+
+    }
+
+
+    /* ---------------------------------------------------------
+       HADITH NUMBER LOOKUP
+    --------------------------------------------------------- */
+
+    async function loadHadithById(id) {
+
+        if (!id) return;
+
+
+        list.innerHTML = `
+
+            <div class="progress-card"
+                 style="text-align:center;padding:25px;">
+
+                <h3>🔎 Finding Hadith...</h3>
+
+            </div>
+
+        `;
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${HADITH_API}/hadith?id=${encodeURIComponent(id)}`
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Hadith not found."
+                );
+
+            }
+
+
+            const hadith =
+                await response.json();
+
+
+            displayHadith(hadith);
+
+
+        } catch (error) {
+
+            console.error(
+                "Hadith lookup error:",
+                error
+            );
+
+
+            list.innerHTML = `
+
+                <div class="progress-card"
+                     style="text-align:center;padding:25px;">
+
+                    <h3>🔎 Hadith not found</h3>
+
+                    <p style="
+                        color:var(--muted);
+                        margin-top:8px;
+                    ">
+                        Enter a valid Hadith number.
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+    /* ---------------------------------------------------------
+       RANDOM BUTTON
+    --------------------------------------------------------- */
+
+    const randomButton =
+        document.getElementById(
+            "randomHadith"
+        );
+
+
+    if (randomButton) {
+
+        randomButton.addEventListener(
+            "click",
+            loadRandomHadith
+        );
+
+    }
+
+
+    /* ---------------------------------------------------------
+       SEARCH INPUT
+       Enter a Hadith number
+    --------------------------------------------------------- */
+
+    if (searchInput) {
 
         searchInput.addEventListener(
-            "input",
-            renderHadith
+            "keydown",
+            event => {
+
+                if (
+                    event.key !== "Enter"
+                ) return;
+
+
+                const value =
+                    searchInput.value.trim();
+
+
+                if (!value) {
+
+                    loadRandomHadith();
+
+                    return;
+
+                }
+
+
+                if (
+                    /^\d+$/.test(value)
+                ) {
+
+                    loadHadithById(value);
+
+                } else {
+
+                    list.innerHTML = `
+
+                        <div class="progress-card"
+                             style="
+                                text-align:center;
+                                padding:25px;
+                             ">
+
+                            <h3>
+                                🔎 Search
+                            </h3>
+
+                            <p style="
+                                color:var(--muted);
+                                margin-top:8px;
+                            ">
+                                For now, enter a
+                                Hadith number or use
+                                Random Hadith.
+                            </p>
+
+                        </div>
+
+                    `;
+
+                }
+
+            }
         );
 
-        categorySelect.addEventListener(
-            "change",
-            renderHadith
-        );
-
-        renderHadith();
-
-        console.log(
-            `KAI V2: Hadith library loaded — ${
-                (window.hadithData || []).length
-            } Hadith`
-        );
     }
 
-    if (document.readyState === "loading") {
 
-        document.addEventListener(
-            "DOMContentLoaded",
-            setupHadith
-        );
+    /* ---------------------------------------------------------
+       INITIAL HADITH
+    --------------------------------------------------------- */
 
-    } else {
+    loadRandomHadith();
 
-        setupHadith();
 
-    }
+    console.log(
+        "KAI V2: Hadith API initialized."
+    );
 
 })();
