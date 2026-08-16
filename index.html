@@ -9,1763 +9,1245 @@
   >
 
   <meta
+    name="theme-color"
+    content="#071411"
+  >
+
+  <meta
     name="description"
     content="Know About Islam — Learn, reflect and grow through Qur'an, Hadith, Fiqh, Adhkar and Islamic knowledge."
   >
 
-  <meta name="theme-color" content="#0b1220">
-
   <title>Know About Islam — V2</title>
 
-  <!-- Existing project stylesheet -->
-  <link rel="stylesheet" href="style-v2.css">
+  <link rel="manifest" href="manifest.json">
 
-  <!-- Google Font -->
+  <link rel="stylesheet" href="style.css">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
     rel="stylesheet"
   >
-
-  <style>
-    /* =========================================================
-       KNOW ABOUT ISLAM — V2 FOUNDATION
-       Temporary V2 styling.
-       We will move/refine this into style.css in Step 2.
-       ========================================================= */
-
-    :root {
-      --bg: #07111f;
-      --bg-soft: #0d1a2b;
-      --card: rgba(255, 255, 255, 0.06);
-      --card-border: rgba(255, 255, 255, 0.1);
-      --text: #f5f7fa;
-      --muted: #9daabd;
-      --primary: #25c58a;
-      --primary-dark: #12976a;
-      --gold: #d9b45b;
-      --danger: #ef6b73;
-      --radius: 20px;
-      --shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(
-          circle at top right,
-          rgba(37, 197, 138, 0.12),
-          transparent 35%
-        ),
-        radial-gradient(
-          circle at bottom left,
-          rgba(217, 180, 91, 0.08),
-          transparent 30%
-        ),
-        var(--bg);
-
-      color: var(--text);
-      font-family: "Inter", sans-serif;
-      line-height: 1.6;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .app-shell {
-      width: 100%;
-      min-height: 100vh;
-      padding-bottom: 90px;
-    }
-
-    /* ================= HEADER ================= */
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 15px 18px;
-
-      background: rgba(7, 17, 31, 0.9);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      border-bottom: 1px solid var(--card-border);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-    }
-
-    .brand-icon {
-      width: 43px;
-      height: 43px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 14px;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--primary),
-          var(--primary-dark)
-        );
-
-      color: #fff;
-      font-size: 22px;
-      box-shadow: 0 8px 25px rgba(37, 197, 138, 0.2);
-    }
-
-    .brand-text h1 {
-      font-size: 16px;
-      line-height: 1.2;
-      font-weight: 800;
-    }
-
-    .brand-text span {
-      display: block;
-      color: var(--muted);
-      font-size: 10px;
-      margin-top: 2px;
-    }
-
-    .header-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .icon-btn {
-      width: 42px;
-      height: 42px;
-
-      display: grid;
-      place-items: center;
-
-      border: 1px solid var(--card-border);
-      border-radius: 13px;
-
-      background: var(--card);
-      color: var(--text);
-
-      transition: 0.2s ease;
-    }
-
-    .icon-btn:active {
-      transform: scale(0.94);
-    }
-
-    /* ================= MAIN ================= */
-
-    main {
-      width: min(1100px, 100%);
-      margin: auto;
-      padding: 22px 16px;
-    }
-
-    .hero {
-      position: relative;
-      overflow: hidden;
-
-      padding: 28px 22px;
-      border-radius: 26px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(37, 197, 138, 0.2),
-          rgba(217, 180, 91, 0.08)
-        );
-
-      border: 1px solid rgba(37, 197, 138, 0.18);
-      box-shadow: var(--shadow);
-    }
-
-    .hero::after {
-      content: "☪";
-
-      position: absolute;
-      right: -15px;
-      bottom: -35px;
-
-      font-family: serif;
-      font-size: 150px;
-
-      color: rgba(255,255,255,0.035);
-      pointer-events: none;
-    }
-
-    .hero-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-
-      padding: 6px 10px;
-      border-radius: 999px;
-
-      background: rgba(255,255,255,0.07);
-      color: var(--primary);
-
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-    }
-
-    .hero h2 {
-      margin-top: 14px;
-
-      max-width: 650px;
-
-      font-size: clamp(28px, 7vw, 48px);
-      line-height: 1.1;
-      font-weight: 800;
-    }
-
-    .hero p {
-      margin-top: 12px;
-
-      max-width: 650px;
-
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .arabic {
-      margin-top: 20px;
-
-      font-family: "Amiri", serif;
-      font-size: 25px;
-      color: var(--gold);
-
-      direction: rtl;
-    }
-
-    /* ================= SEARCH ================= */
-
-    .search-wrapper {
-      margin-top: 18px;
-      position: relative;
-    }
-
-    .search-wrapper input {
-      width: 100%;
-
-      padding: 16px 18px 16px 48px;
-
-      border: 1px solid var(--card-border);
-      border-radius: 17px;
-
-      outline: none;
-
-      background: rgba(255,255,255,0.055);
-      color: var(--text);
-
-      transition: 0.2s ease;
-    }
-
-    .search-wrapper input::placeholder {
-      color: #718095;
-    }
-
-    .search-wrapper input:focus {
-      border-color: rgba(37,197,138,0.5);
-      box-shadow: 0 0 0 4px rgba(37,197,138,0.08);
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 17px;
-      top: 50%;
-      transform: translateY(-50%);
-
-      color: var(--muted);
-    }
-
-    /* ================= SECTION ================= */
-
-    .section {
-      margin-top: 28px;
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      margin-bottom: 13px;
-    }
-
-    .section-heading h3 {
-      font-size: 18px;
-      font-weight: 800;
-    }
-
-    .section-heading span {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    /* ================= DASHBOARD ================= */
-
-    .progress-card {
-      padding: 19px;
-
-      border-radius: var(--radius);
-
-      background: var(--card);
-      border: 1px solid var(--card-border);
-    }
-
-    .progress-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .progress-title {
-      font-weight: 700;
-    }
-
-    .progress-percent {
-      color: var(--primary);
-      font-weight: 800;
-    }
-
-    .progress-track {
-      width: 100%;
-      height: 8px;
-
-      margin-top: 13px;
-
-      overflow: hidden;
-
-      border-radius: 20px;
-
-      background: rgba(255,255,255,0.08);
-    }
-
-    .progress-fill {
-      width: 35%;
-      height: 100%;
-
-      border-radius: inherit;
-
-      background: linear-gradient(
-        90deg,
-        var(--primary-dark),
-        var(--primary)
-      );
-    }
-
-    .progress-meta {
-      display: flex;
-      justify-content: space-between;
-
-      margin-top: 10px;
-
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    /* ================= FEATURE GRID ================= */
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 11px;
-    }
-
-    .feature-card {
-      position: relative;
-
-      min-height: 135px;
-
-      padding: 17px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      border: 1px solid var(--card-border);
-      border-radius: 19px;
-
-      background: var(--card);
-
-      overflow: hidden;
-
-      transition:
-        transform 0.2s ease,
-        border-color 0.2s ease;
-    }
-
-    .feature-card:active {
-      transform: scale(0.97);
-    }
-
-    .feature-card:hover {
-      border-color: rgba(37,197,138,0.35);
-    }
-
-    .feature-icon {
-      width: 42px;
-      height: 42px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 13px;
-
-      background: rgba(37,197,138,0.1);
-
-      font-size: 20px;
-    }
-
-    .feature-card h4 {
-      margin-top: 12px;
-      font-size: 14px;
-    }
-
-    .feature-card p {
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 10px;
-    }
-
-    /* ================= DAILY AYAH ================= */
-
-    .ayah-card {
-      padding: 23px;
-
-      border-radius: var(--radius);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(217,180,91,0.12),
-          rgba(255,255,255,0.035)
-        );
-
-      border: 1px solid rgba(217,180,91,0.15);
-    }
-
-    .ayah-label {
-      color: var(--gold);
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .ayah-arabic {
-      margin-top: 18px;
-
-      font-family: "Amiri", serif;
-      font-size: 28px;
-      line-height: 1.9;
-
-      text-align: right;
-      direction: rtl;
-    }
-
-    .ayah-translation {
-      margin-top: 14px;
-
-      color: var(--muted);
-      font-size: 13px;
-      font-style: italic;
-    }
-
-    .ayah-reference {
-      margin-top: 12px;
-
-      color: var(--gold);
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    /* ================= QUICK ACTIONS ================= */
-
-    .quick-actions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 9px;
-    }
-
-    .quick-btn {
-      min-height: 82px;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      gap: 7px;
-
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-
-      background: var(--card);
-      color: var(--text);
-
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .quick-btn span:first-child {
-      font-size: 20px;
-    }
-
-    /* ================= QUIZ ================= */
-
-    #quizGame,
-    #quizResult {
-      padding: 20px;
-
-      border-radius: var(--radius);
-
-      background: var(--card);
-      border: 1px solid var(--card-border);
-    }
-
-    #quizResult {
-      display: none;
-    }
-
-    .quiz-question {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
-
-    /* Compatibility IDs for existing quiz JS */
-
-    #quizScore,
-    #quizFeedback,
-    #nextQuestion,
-    #finalScore,
-    #totalQuestions,
-    #correctAnswers {
-      margin-top: 10px;
-    }
-
-    /* ================= BOTTOM NAV ================= */
-
-    .bottom-nav {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-
-      z-index: 1000;
-
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-
-      padding:
-        9px
-        8px
-        calc(9px + env(safe-area-inset-bottom));
-
-      background: rgba(7,17,31,0.94);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      border-top: 1px solid var(--card-border);
-    }
-
-    .nav-item {
-      min-height: 55px;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-
-      gap: 3px;
-
-      border: 0;
-      background: transparent;
-      color: #718095;
-
-      font-size: 9px;
-      font-weight: 600;
-    }
-
-    .nav-item span:first-child {
-      font-size: 19px;
-    }
-
-    .nav-item.active {
-      color: var(--primary);
-    }
-
-    /* ================= RESPONSIVE ================= */
-
-    @media (min-width: 700px) {
-
-      .topbar {
-        padding-left: 30px;
-        padding-right: 30px;
-      }
-
-      main {
-        padding: 35px 25px;
-      }
-
-      .feature-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .hero {
-        padding: 45px;
-      }
-
-      .quick-actions {
-        grid-template-columns: repeat(6, 1fr);
-      }
-
-      .bottom-nav {
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
-
-        width: min(650px, 100%);
-
-        border: 1px solid var(--card-border);
-        border-bottom: 0;
-
-        border-radius: 20px 20px 0 0;
-      }
-    }
-  </style>
 </head>
 
-<body>
+<body class="dark">
 
-  <div class="app-shell">
+<header class="topbar">
 
-    <!-- =====================================================
-         HEADER
-         ===================================================== -->
+  <div class="brand">
 
-    <header class="topbar">
+    <div class="brand-icon">
+      ☪
+    </div>
 
-      <a href="#home" class="brand">
+    <div class="brand-text">
+      <h1>Know About Islam</h1>
+      <span>Islamic Religious Knowledge • V2</span>
+    </div>
 
-        <div class="brand-icon">
-          ☪
-        </div>
+  </div>
 
-        <div class="brand-text">
-          <h1>Know About Islam</h1>
-          <span>Islamic Religious Knowledge • V2</span>
-        </div>
+  <div class="top-actions">
 
-      </a>
+    <button
+      id="themeBtn"
+      class="icon-btn"
+      aria-label="Toggle theme"
+      type="button"
+    >
+      ☀️
+    </button>
 
-      <div class="header-actions">
+    <button
+      id="menuBtn"
+      class="icon-btn mobile-menu"
+      aria-label="Open menu"
+      type="button"
+    >
+      ☰
+    </button>
 
-        <button
-          class="icon-btn"
-          id="themeToggle"
-          type="button"
-          aria-label="Toggle theme"
-        >
-          🌙
-        </button>
+  </div>
 
-        <button
-          class="icon-btn"
-          id="menuButton"
-          type="button"
-          aria-label="Open menu"
-        >
-          ☰
-        </button>
+</header>
 
-      </div>
 
-    </header>
+<nav
+  id="sidebar"
+  class="sidebar"
+  aria-label="Main navigation"
+>
 
+  <button class="nav-item active" data-section="home">
+    <span>⌂</span>
+    <span>Home</span>
+  </button>
 
-    <!-- =====================================================
-         MAIN CONTENT
-         ===================================================== -->
+  <button class="nav-item" data-section="quran">
+    <span>📖</span>
+    <span>Qur'an</span>
+  </button>
 
-    <main id="home">
+  <button class="nav-item" data-section="adhkar">
+    <span>🤲</span>
+    <span>Adhkar</span>
+  </button>
 
-      <!-- HERO -->
+  <button class="nav-item" data-section="hadith">
+    <span>📜</span>
+    <span>Hadith</span>
+  </button>
 
-      <section class="hero">
+  <button class="nav-item" data-section="fiqh">
+    <span>🕌</span>
+    <span>Fiqh & Sunnah</span>
+  </button>
 
-        <span class="hero-label">
-          ✨ VERSION 2.0
-        </span>
+  <button class="nav-item" data-section="principles">
+    <span>🧭</span>
+    <span>Principles</span>
+  </button>
 
-        <h2>
-          Learn Islam.<br>
-          Live Islam.<br>
-          Grow with knowledge.
-        </h2>
+  <button class="nav-item" data-section="quiz">
+    <span>🎯</span>
+    <span>Quiz</span>
+  </button>
 
-        <p>
-          Explore Qur'an, Hadith, Adhkar, Fiqh, Sunnah and
-          Islamic principles in one learning experience.
-        </p>
+  <button class="nav-item" data-section="tasbih">
+    <span>📿</span>
+    <span>Tasbih</span>
+  </button>
 
-        <div class="arabic">
-          وَقُلْ رَبِّ زِدْنِي عِلْمًا
-        </div>
+  <button class="nav-item" data-section="bookmarks">
+    <span>🔖</span>
+    <span>Saved</span>
+  </button>
 
-      </section>
+</nav>
 
 
-      <!-- GLOBAL SEARCH -->
+<main class="main-content">
 
-      <section class="search-wrapper">
 
-        <span class="search-icon">
-          🔎
-        </span>
+<!-- HOME -->
 
-        <input
-          type="search"
-          id="globalSearch"
-          placeholder="Search Qur'an, Hadith, Fiqh, Adhkar..."
-          autocomplete="off"
-        >
+<section
+  id="home"
+  class="page active-page"
+>
 
-      </section>
+  <section class="hero">
 
-
-      <!-- LEARNING PROGRESS -->
-
-      <section class="section">
-
-        <div class="section-heading">
-
-          <h3>
-            Your Learning Journey
-          </h3>
-
-          <span>
-            V2 Dashboard
-          </span>
-
-        </div>
-
-        <div class="progress-card">
-
-          <div class="progress-top">
-
-            <span class="progress-title">
-              Islamic Knowledge
-            </span>
-
-            <span
-              class="progress-percent"
-              id="learningPercent"
-            >
-              35%
-            </span>
-
-          </div>
-
-          <div class="progress-track">
-
-            <div
-              class="progress-fill"
-              id="learningProgress"
-            ></div>
-
-          </div>
-
-          <div class="progress-meta">
-
-            <span id="lessonsCompleted">
-              0 lessons completed
-            </span>
-
-            <span id="learningStreak">
-              🔥 0 day streak
-            </span>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- CORE KNOWLEDGE -->
-
-      <section class="section">
-
-        <div class="section-heading">
-
-          <h3>
-            Explore Knowledge
-          </h3>
-
-          <span>
-            Learn
-          </span>
-
-        </div>
-
-        <div class="feature-grid">
-
-          <a
-            href="#quran"
-            class="feature-card"
-            data-section="quran"
-          >
-
-            <div class="feature-icon">
-              📖
-            </div>
-
-            <div>
-              <h4>Qur'an</h4>
-              <p>Read, search and reflect.</p>
-            </div>
-
-          </a>
-
-
-          <a
-            href="#hadith"
-            class="feature-card"
-            data-section="hadith"
-          >
-
-            <div class="feature-icon">
-              📜
-            </div>
-
-            <div>
-              <h4>Hadith</h4>
-              <p>Explore Prophetic guidance.</p>
-            </div>
-
-          </a>
-
-
-          <a
-            href="#adhkar"
-            class="feature-card"
-            data-section="adhkar"
-          >
-
-            <div class="feature-icon">
-              🤲
-            </div>
-
-            <div>
-              <h4>Adhkar</h4>
-              <p>Remember Allah daily.</p>
-            </div>
-
-          </a>
-
-
-          <a
-            href="#fiqh"
-            class="feature-card"
-            data-section="fiqh"
-          >
-
-            <div class="feature-icon">
-              🕌
-            </div>
-
-            <div>
-              <h4>Fiqh</h4>
-              <p>Learn Islamic rulings.</p>
-            </div>
-
-          </a>
-
-
-          <a
-            href="#sunnah"
-            class="feature-card"
-            data-section="sunnah"
-          >
-
-            <div class="feature-icon">
-              🌙
-            </div>
-
-            <div>
-              <h4>Sunnah</h4>
-              <p>Follow the Prophetic way.</p>
-            </div>
-
-          </a>
-
-
-          <a
-            href="#principles"
-            class="feature-card"
-            data-section="principles"
-          >
-
-            <div class="feature-icon">
-              🧭
-            </div>
-
-            <div>
-              <h4>Principles</h4>
-              <p>Build Islamic understanding.</p>
-            </div>
-
-          </a>
-
-
-          <a
-            href="#quiz"
-            class="feature-card"
-            data-section="quiz"
-          >
-
-            <div class="feature-icon">
-              🎯
-            </div>
-
-            <div>
-              <h4>Quiz</h4>
-              <p>Test your knowledge.</p>
-            </div>
-
-          </a>
-
-
-          <a
-            href="#tasbih"
-            class="feature-card"
-            data-section="tasbih"
-          >
-
-            <div class="feature-icon">
-              📿
-            </div>
-
-            <div>
-              <h4>Tasbih</h4>
-              <p>Count your remembrance.</p>
-            </div>
-
-          </a>
-
-        </div>
-
-      </section>
-
-
-      <!-- DAILY AYAH -->
-
-      <section class="section">
-
-        <div class="section-heading">
-
-          <h3>
-            Ayah for Reflection
-          </h3>
-
-          <span>
-            Daily
-          </span>
-
-        </div>
-
-        <article class="ayah-card">
-
-          <div class="ayah-label">
-            Qur'an
-          </div>
-
-          <div class="ayah-arabic">
-            إِنَّ مَعَ الْعُسْرِ يُسْرًا
-          </div>
-
-          <div class="ayah-translation">
-            "Indeed, with hardship comes ease."
-          </div>
-
-          <div class="ayah-reference">
-            Qur'an 94:6
-          </div>
-
-        </article>
-
-      </section>
-
-
-      <!-- QUICK ACTIONS -->
-
-      <section class="section">
-
-        <div class="section-heading">
-
-          <h3>
-            Quick Access
-          </h3>
-
-        </div>
-
-        <div class="quick-actions">
-
-          <button
-            class="quick-btn"
-            type="button"
-            data-action="quran"
-          >
-            <span>📖</span>
-            Qur'an
-          </button>
-
-          <button
-            class="quick-btn"
-            type="button"
-            data-action="hadith"
-          >
-            <span>📜</span>
-            Hadith
-          </button>
-
-          <button
-            class="quick-btn"
-            type="button"
-            data-action="adhkar"
-          >
-            <span>🤲</span>
-            Adhkar
-          </button>
-
-          <button
-            class="quick-btn"
-            type="button"
-            data-action="quiz"
-          >
-            <span>🎯</span>
-            Quiz
-          </button>
-
-          <button
-            class="quick-btn"
-            type="button"
-            data-action="tasbih"
-          >
-            <span>📿</span>
-            Tasbih
-          </button>
-
-          <button
-            class="quick-btn"
-            type="button"
-            data-action="bookmarks"
-          >
-            <span>🔖</span>
-            Saved
-          </button>
-
-        </div>
-
-      </section>
-
-
-      <!-- =====================================================
-           QUIZ COMPATIBILITY SECTION
-
-           IMPORTANT:
-           Existing app.js expects these IDs.
-           We keep them in V2.
-           ===================================================== -->
-
-      <section
-        class="section"
-        id="quiz"
-      >
-
-        <div class="section-heading">
-
-          <h3>
-            Knowledge Challenge
-          </h3>
-
-          <span>
-            Test yourself
-          </span>
-
-        </div>
-
-
-        <div id="quizGame">
-
-          <div
-            id="quizQuestion"
-            class="quiz-question"
-          >
-            Your quiz will appear here.
-          </div>
-
-          <div id="quizOptions"></div>
-
-          <div id="quizScore">
-            Score: 0
-          </div>
-
-          <div id="quizFeedback"></div>
-
-          <button
-            id="nextQuestion"
-            type="button"
-          >
-            Next Question
-          </button>
-
-        </div>
-
-
-        <div id="quizResult">
-
-          <h3>
-            Quiz Complete 🎉
-          </h3>
-
-          <p>
-            Final Score:
-            <strong id="finalScore">0</strong>
-          </p>
-
-          <p>
-            Total Questions:
-            <strong id="totalQuestions">0</strong>
-          </p>
-
-          <p>
-            Correct Answers:
-            <strong id="correctAnswers">0</strong>
-          </p>
-
-        </div>
-
-      </section>
-
-
-      <!-- FUTURE V2 SECTIONS -->
-
-      <section
-        class="section"
-        id="quran"
-      >
-        <div class="progress-card">
-          <h3>📖 Qur'an</h3>
-          <p style="color:var(--muted);margin-top:7px;">
-            Qur'an library coming into V2.
-          </p>
-        </div>
-      </section>
-
-
-      <section
-        class="section"
-        id="hadith"
-      >
-      <div class="progress-card" style="padding:20px;">
-
-    <h2 style="margin-bottom:8px;">
-        📜 Hadith Library
-    </h2>
-
-    <p style="color:var(--muted);margin-bottom:18px;">
-        Explore authentic Hadith with references, narrators and topics.
+    <p class="eyebrow hero-eyebrow">
+      ✨ VERSION 2.0
     </p>
 
-    <!-- SEARCH -->
+    <h2>
+      Learn Islam.
+      <br>
+      Live Islam.
+      <br>
+      <span>Grow with knowledge.</span>
+    </h2>
+
+    <p class="hero-text">
+      Explore Qur'an, Hadith, Adhkar, Fiqh,
+      Sunnah and Islamic principles in one
+      learning experience.
+    </p>
+
+    <div class="arabic hero-arabic">
+      وَقُلْ رَبِّ زِدْنِي عِلْمًا
+    </div>
+
+  </section>
+
+
+  <section class="search-wrapper">
+
+    <span class="search-icon">
+      🔎
+    </span>
+
     <input
-        type="search"
-        id="hadith-search"
-        placeholder="🔎 Search Hadith..."
-        style="
-            width:100%;
-            padding:13px;
-            border-radius:12px;
-            border:1px solid var(--border);
-            background:var(--card);
-            color:var(--text);
-            margin-bottom:12px;
-        "
+      type="search"
+      id="globalSearch"
+      placeholder="Search Qur'an, Hadith, Fiqh, Adhkar..."
+      autocomplete="off"
     >
 
-    <!-- CATEGORY -->
-    <select
-        id="hadith-category"
-        style="
-            width:100%;
-            padding:13px;
-            border-radius:12px;
-            border:1px solid var(--border);
-            background:var(--card);
-            color:var(--text);
-            margin-bottom:20px;
-        "
-    >
-        <option value="all">📚 All Topics</option>
-        <option value="Intentions">Intentions</option>
-        <option value="Islam">Islam</option>
-        <option value="Halal and Haram">Halal & Haram</option>
-        <option value="Purification">Purification</option>
-        <option value="Good Character">Good Character</option>
-    </select>
+  </section>
 
-    <!-- HADITH RESULTS -->
-    <div id="hadith-list">
 
-        <div style="
-            text-align:center;
-            padding:25px;
-            color:var(--muted);
-        ">
-            Loading Hadith...
-        </div>
+  <div class="section-heading">
+
+    <div>
+
+      <p class="eyebrow">
+        YOUR JOURNEY
+      </p>
+
+      <h2>
+        Learning Dashboard
+      </h2>
 
     </div>
 
-</div>
-      </section>
-
-
-      <section
-        class="section"
-        id="adhkar"
-      >
-        <div class="progress-card">
-          <h3>🤲 Adhkar</h3>
-          <p style="color:var(--muted);margin-top:7px;">
-            Daily Adhkar system coming into V2.
-          </p>
-        </div>
-      </section>
-
-
-      <section
-        class="section"
-        id="fiqh"
-      >
-        <div class="progress-card">
-          <h3>🕌 Fiqh & Madhhab</h3>
-          <p style="color:var(--muted);margin-top:7px;">
-            Structured Fiqh library coming into V2.
-          </p>
-        </div>
-      </section>
-
-
-      <section
-        class="section"
-        id="sunnah"
-      >
-        <div class="progress-card">
-          <h3>🌙 Sunnah</h3>
-          <p style="color:var(--muted);margin-top:7px;">
-            Sunnah learning section coming into V2.
-          </p>
-        </div>
-      </section>
-
-
-      <section
-        class="section"
-        id="principles"
-      >
-        <div class="progress-card">
-          <h3>🧭 Islamic Principles</h3>
-          <p style="color:var(--muted);margin-top:7px;">
-            Principles and foundational knowledge coming into V2.
-          </p>
-        </div>
-      </section>
-
-
-      <section
-        class="section"
-        id="tasbih"
-      >
-        <div class="progress-card">
-          <h3>📿 Tasbih</h3>
-          <p style="color:var(--muted);margin-top:7px;">
-            Tasbih counter will remain part of V2.
-          </p>
-        </div>
-      </section>
-
-    </main>
-
-
-    <!-- =====================================================
-         BOTTOM NAVIGATION
-         ===================================================== -->
-
-    <nav
-      class="bottom-nav"
-      aria-label="Main navigation"
-    >
-
-      <button
-        class="nav-item active"
-        type="button"
-        data-nav="home"
-      >
-        <span>⌂</span>
-        Home
-      </button>
-
-      <button
-        class="nav-item"
-        type="button"
-        data-nav="quran"
-      >
-        <span>📖</span>
-        Qur'an
-      </button>
-
-      <button
-        class="nav-item"
-        type="button"
-        data-nav="hadith"
-      >
-        <span>📜</span>
-        Hadith
-      </button>
-
-      <button
-        class="nav-item"
-        type="button"
-        data-nav="quiz"
-      >
-        <span>🎯</span>
-        Quiz
-      </button>
-
-      <button
-        class="nav-item"
-        type="button"
-        data-nav="adhkar"
-      >
-        <span>🤲</span>
-        Adhkar
-      </button>
-
-    </nav>
+    <span>
+      V2 Dashboard
+    </span>
 
   </div>
 
 
-  <!-- =====================================================
-       V2 FOUNDATION JAVASCRIPT
-       ===================================================== -->
+  <div class="stats-grid">
 
-  <script>
+    <div class="stat-card">
 
-    /* ============================
-       V2 LOCAL PROGRESS
-       ============================ */
+      <div class="stat-icon">
+        📖
+      </div>
 
-    const KAI_PROGRESS_KEY =
-      "know_about_islam_v2_progress";
+      <div>
+        <strong id="quranProgress">
+          0
+        </strong>
 
-    let kaiProgress = {
-      lessons: 0,
-      streak: 0,
-      percent: 35
-    };
+        <span>
+          Qur'an searches
+        </span>
+      </div>
 
-    try {
+    </div>
 
-      const saved =
-        localStorage.getItem(KAI_PROGRESS_KEY);
 
-      if (saved) {
-        kaiProgress = {
-          ...kaiProgress,
-          ...JSON.parse(saved)
-        };
-      }
+    <div class="stat-card">
 
-    } catch (error) {
+      <div class="stat-icon">
+        🤲
+      </div>
 
-      console.log(
-        "V2 progress storage unavailable."
-      );
+      <div>
+        <strong id="adhkarProgress">
+          0%
+        </strong>
 
-    }
+        <span>
+          Adhkar completed
+        </span>
+      </div>
 
+    </div>
 
-    function saveProgress() {
 
-      try {
+    <div class="stat-card">
 
-        localStorage.setItem(
-          KAI_PROGRESS_KEY,
-          JSON.stringify(kaiProgress)
-        );
+      <div class="stat-icon">
+        📚
+      </div>
 
-      } catch (error) {
+      <div>
+        <strong id="lessonProgress">
+          0
+        </strong>
 
-        console.log(
-          "Unable to save V2 progress."
-        );
+        <span>
+          Lessons
+        </span>
+      </div>
 
-      }
+    </div>
 
-    }
 
+    <div class="stat-card">
 
-    function updateProgressUI() {
+      <div class="stat-icon">
+        🔥
+      </div>
 
-      const percent =
-        document.getElementById(
-          "learningPercent"
-        );
+      <div>
+        <strong id="streak">
+          1
+        </strong>
 
-      const progress =
-        document.getElementById(
-          "learningProgress"
-        );
+        <span>
+          Day streak
+        </span>
+      </div>
 
-      const lessons =
-        document.getElementById(
-          "lessonsCompleted"
-        );
+    </div>
 
-      const streak =
-        document.getElementById(
-          "learningStreak"
-        );
+  </div>
 
 
-      if (percent) {
-        percent.textContent =
-          `${kaiProgress.percent}%`;
-      }
+  <section class="section progress-card">
 
+    <div class="progress-top">
 
-      if (progress) {
-        progress.style.width =
-          `${kaiProgress.percent}%`;
-      }
+      <strong class="progress-title">
+        Islamic Knowledge
+      </strong>
 
+      <strong
+        class="progress-percent"
+        id="learningPercent"
+      >
+        35%
+      </strong>
 
-      if (lessons) {
-        lessons.textContent =
-          `${kaiProgress.lessons} lessons completed`;
-      }
+    </div>
 
+    <div class="progress-track">
 
-      if (streak) {
-        streak.textContent =
-          `🔥 ${kaiProgress.streak} day streak`;
-      }
+      <div
+        class="progress-fill"
+        id="learningProgress"
+      ></div>
 
-    }
+    </div>
 
+    <div class="progress-meta">
 
-    updateProgressUI();
+      <span id="lessonsCompleted">
+        0 lessons completed
+      </span>
 
+      <span id="learningStreak">
+        🔥 1 day streak
+      </span>
 
-    /* ============================
-       NAVIGATION
-       ============================ */
+    </div>
 
-    function goToSection(sectionId) {
+  </section>
 
-      const target =
-        document.getElementById(sectionId);
 
-      if (!target) return;
+  <div class="section-heading">
 
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+    <div>
 
-    }
+      <p class="eyebrow">
+        EXPLORE
+      </p>
 
+      <h2>
+        Core Knowledge
+      </h2>
 
-    document
-      .querySelectorAll("[data-nav]")
-      .forEach(button => {
+    </div>
 
-        button.addEventListener(
-          "click",
-          () => {
+  </div>
 
-            const section =
-              button.dataset.nav;
 
-            goToSection(section);
+  <div class="learning-grid">
 
-            document
-              .querySelectorAll(".nav-item")
-              .forEach(item =>
-                item.classList.remove("active")
-              );
+    <button
+      class="learning-card"
+      data-go="quran"
+    >
+      <span>📖</span>
+      <strong>Qur'an</strong>
+      <small>Read, search and reflect.</small>
+    </button>
 
-            button.classList.add("active");
 
-          }
-        );
+    <button
+      class="learning-card"
+      data-go="hadith"
+    >
+      <span>📜</span>
+      <strong>Hadith</strong>
+      <small>Explore Prophetic guidance.</small>
+    </button>
 
-      });
 
+    <button
+      class="learning-card"
+      data-go="adhkar"
+    >
+      <span>🤲</span>
+      <strong>Adhkar</strong>
+      <small>Remember Allah daily.</small>
+    </button>
 
-    document
-      .querySelectorAll("[data-section]")
-      .forEach(card => {
 
-        card.addEventListener(
-          "click",
-          event => {
+    <button
+      class="learning-card"
+      data-go="fiqh"
+    >
+      <span>🕌</span>
+      <strong>Fiqh</strong>
+      <small>Learn Islamic rulings.</small>
+    </button>
 
-            event.preventDefault();
 
-            goToSection(
-              card.dataset.section
-            );
+    <button
+      class="learning-card"
+      data-go="principles"
+    >
+      <span>🧭</span>
+      <strong>Principles</strong>
+      <small>Build Islamic understanding.</small>
+    </button>
 
-          }
-        );
 
-      });
+    <button
+      class="learning-card"
+      data-go="quiz"
+    >
+      <span>🎯</span>
+      <strong>Quiz</strong>
+      <small>Test your knowledge.</small>
+    </button>
 
 
-    document
-      .querySelectorAll("[data-action]")
-      .forEach(button => {
+    <button
+      class="learning-card"
+      data-go="tasbih"
+    >
+      <span>📿</span>
+      <strong>Tasbih</strong>
+      <small>Count your remembrance.</small>
+    </button>
 
-        button.addEventListener(
-          "click",
-          () => {
 
-            goToSection(
-              button.dataset.action
-            );
+    <button
+      class="learning-card"
+      data-go="bookmarks"
+    >
+      <span>🔖</span>
+      <strong>Saved</strong>
+      <small>Return to saved content.</small>
+    </button>
 
-          }
-        );
+  </div>
 
-      });
 
+  <section class="section">
 
-    /* ============================
-       GLOBAL SEARCH
-       ============================ */
+    <div class="section-heading">
 
-    const globalSearch =
-      document.getElementById(
-        "globalSearch"
-      );
+      <div>
 
+        <p class="eyebrow">
+          REFLECT
+        </p>
 
-    if (globalSearch) {
+        <h2>
+          Ayah for Reflection
+        </h2>
 
-      globalSearch.addEventListener(
-        "keydown",
-        event => {
+      </div>
 
-          if (
-            event.key.toLowerCase() !==
-            "enter"
-          ) {
-            return;
-          }
+      <span>
+        Qur'an 94:6
+      </span>
 
-          const query =
-            globalSearch.value
-              .trim()
-              .toLowerCase();
+    </div>
 
 
-          if (!query) return;
+    <article class="ayah-card">
 
+      <div class="ayah-label">
+        QUR'AN
+      </div>
 
-          const destinations = {
-            quran: "quran",
-            qur: "quran",
-            hadith: "hadith",
-            hadeeth: "hadith",
-            adhkar: "adhkar",
-            dhikr: "adhkar",
-            fiqh: "fiqh",
-            sunnah: "sunnah",
-            principle: "principles",
-            principles: "principles",
-            quiz: "quiz",
-            tasbih: "tasbih"
-          };
+      <div class="ayah-arabic">
+        إِنَّ مَعَ الْعُسْرِ يُسْرًا
+      </div>
 
+      <p class="ayah-translation">
+        “Indeed, with hardship comes ease.”
+      </p>
 
-          let destination = null;
+      <div class="ayah-reference">
+        Qur'an 94:6
+      </div>
 
+      <button
+        id="bookmarkAyah"
+        class="secondary-btn"
+        type="button"
+      >
+        🔖 Save Ayah
+      </button>
 
-          for (
-            const keyword in destinations
-          ) {
+    </article>
 
-            if (query.includes(keyword)) {
+  </section>
 
-              destination =
-                destinations[keyword];
+</section>
 
-              break;
 
-            }
+<!-- QURAN -->
 
-          }
+<section
+  id="quran"
+  class="page"
+>
 
+  <div class="page-header">
 
-          if (destination) {
+    <div>
 
-            goToSection(destination);
+      <p class="eyebrow">
+        THE NOBLE QUR'AN
+      </p>
 
-          } else {
+      <h2>
+        Qur'an Library
+      </h2>
 
-            alert(
-              `Search engine ready for V2.\n\n`
-              + `You searched for: "${globalSearch.value}"\n\n`
-              + `Our full Qur'an + Hadith + Fiqh search will be connected next.`
-            );
+    </div>
 
-          }
+  </div>
 
-        }
-      );
 
-    }
+  <div class="search-box">
 
+    <input
+      id="quranSearch"
+      type="search"
+      placeholder="Search Qur'an..."
+    >
 
-    /* ============================
-       THEME BUTTON
-       ============================ */
+    <button
+      id="searchQuranBtn"
+      type="button"
+    >
+      Search
+    </button>
 
-    const themeToggle =
-      document.getElementById(
-        "themeToggle"
-      );
+  </div>
 
 
-    if (themeToggle) {
+  <div
+    id="quranResults"
+    class="quran-list"
+  >
 
-      themeToggle.addEventListener(
-        "click",
-        () => {
+    <article class="ayah-card">
 
-          document.body.classList.toggle(
-            "light-mode"
-          );
+      <div class="ayah-top">
 
+        <span class="ayah-number">
+          1:1
+        </span>
 
-          const light =
-            document.body.classList.contains(
-              "light-mode"
-            );
+        <button
+          class="bookmark-small"
+          type="button"
+        >
+          🔖
+        </button>
 
+      </div>
 
-          themeToggle.textContent =
-            light ? "☀️" : "🌙";
+      <div class="arabic">
+        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+      </div>
 
-        }
-      );
+      <p class="translation">
+        In the name of Allah, the Most Compassionate,
+        the Most Merciful.
+      </p>
 
-    }
+    </article>
 
 
-    /* ============================
-       MENU BUTTON
-       ============================ */
+    <article class="ayah-card">
 
-    const menuButton =
-      document.getElementById(
-        "menuButton"
-      );
+      <div class="ayah-top">
 
+        <span class="ayah-number">
+          94:6
+        </span>
 
-    if (menuButton) {
+        <button
+          class="bookmark-small"
+          type="button"
+        >
+          🔖
+        </button>
 
-      menuButton.addEventListener(
-        "click",
-        () => {
+      </div>
 
-          alert(
-            "Know About Islam V2 Menu\n\n"
-            + "📖 Qur'an\n"
-            + "📜 Hadith\n"
-            + "🤲 Adhkar\n"
-            + "🕌 Fiqh\n"
-            + "🌙 Sunnah\n"
-            + "🧭 Principles\n"
-            + "🎯 Quiz\n"
-            + "📿 Tasbih\n\n"
-            + "More features coming."
-          );
+      <div class="arabic">
+        إِنَّ مَعَ الْعُسْرِ يُسْرًا
+      </div>
 
-        }
-      );
+      <p class="translation">
+        Indeed, with hardship comes ease.
+      </p>
 
-    }
+    </article>
 
+  </div>
 
-    /* ============================
-       VERSION LOG
-       ============================ */
 
-    console.log(
-      "%c Know About Islam V2.0 ",
-      "background:#25c58a;color:#07111f;font-weight:bold;padding:6px;"
-    );
+  <div class="info-note">
 
-    console.log(
-      "V2 Foundation loaded successfully."
-    );
+    <strong>Note:</strong>
+    The current local Qur'an search dataset
+    is a small sample. A complete verified
+    Qur'an database can be connected next.
 
-  </script>
+  </div>
 
-  <!-- Existing application logic -->
+</section>
+
+
+<!-- ADHKAR -->
+
+<section
+  id="adhkar"
+  class="page"
+>
+
+  <div class="page-header">
+
+    <div>
+
+      <p class="eyebrow">
+        REMEMBRANCE OF ALLAH
+      </p>
+
+      <h2>
+        Daily Adhkar
+      </h2>
+
+    </div>
+
+    <div class="progress-pill">
+      <span id="adhkarCount">
+        0
+      </span>
+      /3
+    </div>
+
+  </div>
+
+
+  <div class="category-tabs">
+
+    <button
+      class="category active"
+      data-category="morning"
+    >
+      🌅 Morning
+    </button>
+
+    <button
+      class="category"
+      data-category="evening"
+    >
+      🌇 Evening
+    </button>
+
+    <button
+      class="category"
+      data-category="sleep"
+    >
+      🌙 Before Sleep
+    </button>
+
+  </div>
+
+
+  <div id="adhkarList"></div>
+
+</section>
+
+
+<!-- HADITH -->
+
+<section
+  id="hadith"
+  class="page"
+>
+
+  <div class="page-header">
+
+    <div>
+
+      <p class="eyebrow">
+        SUNNAH
+      </p>
+
+      <h2>
+        Hadith Library
+      </h2>
+
+    </div>
+
+    <button
+      class="secondary-btn"
+      id="randomHadith"
+      type="button"
+    >
+      🎲 Random
+    </button>
+
+  </div>
+
+
+  <div class="search-box">
+
+    <input
+      id="hadithSearch"
+      type="search"
+      placeholder="Search Hadith..."
+    >
+
+  </div>
+
+
+  <div id="hadithList"></div>
+
+
+  <div class="info-note">
+
+    <strong>Source note:</strong>
+    Some entries in the current app are
+    placeholders pending verified
+    production references.
+
+  </div>
+
+</section>
+
+
+<!-- FIQH -->
+
+<section
+  id="fiqh"
+  class="page"
+>
+
+  <div class="page-header">
+
+    <div>
+
+      <p class="eyebrow">
+        ISLAMIC JURISPRUDENCE
+      </p>
+
+      <h2>
+        Fiqh & Madhhab
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div class="madhhab-grid">
+
+    <button
+      class="madhhab active"
+      data-madhhab="all"
+    >
+      <strong>All</strong>
+      <small>Compare</small>
+    </button>
+
+    <button
+      class="madhhab"
+      data-madhhab="hanafi"
+    >
+      <strong>Hanafi</strong>
+      <small>School</small>
+    </button>
+
+    <button
+      class="madhhab"
+      data-madhhab="maliki"
+    >
+      <strong>Maliki</strong>
+      <small>School</small>
+    </button>
+
+    <button
+      class="madhhab"
+      data-madhhab="shafii"
+    >
+      <strong>Shafi'i</strong>
+      <small>School</small>
+    </button>
+
+    <button
+      class="madhhab"
+      data-madhhab="hanbali"
+    >
+      <strong>Hanbali</strong>
+      <small>School</small>
+    </button>
+
+  </div>
+
+
+  <div id="fiqhList"></div>
+
+
+  <div class="warning-card">
+
+    <strong>Important:</strong>
+    Detailed fiqh rulings should be presented
+    from authoritative, verified sources and
+    qualified scholarship.
+
+  </div>
+
+</section>
+
+
+<!-- PRINCIPLES -->
+
+<section
+  id="principles"
+  class="page"
+>
+
+  <div class="page-header">
+
+    <div>
+
+      <p class="eyebrow">
+        FOUNDATIONS
+      </p>
+
+      <h2>
+        Islamic Principles
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="principlesList"
+    class="lesson-grid"
+  ></div>
+
+</section>
+
+
+<!-- QUIZ -->
+
+<section
+  id="quiz"
+  class="page"
+>
+
+  <div class="page-header">
+
+    <div>
+
+      <p class="eyebrow">
+        TEST YOUR KNOWLEDGE
+      </p>
+
+      <h2>
+        Islamic Quiz
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div id="quizHome">
+
+    <div class="quiz-intro">
+
+      <div class="quiz-icon">
+        🎯
+      </div>
+
+      <h3>
+        Knowledge Challenge
+      </h3>
+
+      <p>
+        Test what you know about the Qur'an,
+        Hadith, Seerah, Fiqh and general
+        Islamic knowledge.
+      </p>
+
+    </div>
+
+
+    <div class="quiz-categories">
+
+      <button
+        class="quiz-category"
+        data-quiz="quran"
+      >
+        <span>📖</span>
+        <strong>Qur'an</strong>
+        <small>Qur'anic knowledge</small>
+      </button>
+
+
+      <button
+        class="quiz-category"
+        data-quiz="hadith"
+      >
+        <span>📜</span>
+        <strong>Hadith</strong>
+        <small>Prophetic guidance</small>
+      </button>
+
+
+      <button
+        class="quiz-category"
+        data-quiz="seerah"
+      >
+        <span>🌙</span>
+        <strong>Seerah</strong>
+        <small>Life of the Prophet ﷺ</small>
+      </button>
+
+
+      <button
+        class="quiz-category"
+        data-quiz="fiqh"
+      >
+        <span>🕌</span>
+        <strong>Fiqh</strong>
+        <small>Islamic jurisprudence</small>
+      </button>
+
+
+      <button
+        class="quiz-category"
+        data-quiz="general"
+      >
+        <span>🧭</span>
+        <strong>General</strong>
+        <small>General knowledge</small>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="quizGame"
+    class="quiz-game hidden"
+  >
+
+    <div class="quiz-top">
+
+      <button
+        id="backToQuiz"
+        type="button"
+      >
+        ← Categories
+      </button>
+
+      <span id="quizProgress">
+        Question 1/10
+      </span>
+
+      <span id="quizScore">
+        Score: 0
+      </span>
+
+    </div>
+
+
+    <div class="quiz-progress-bar">
+
+      <div
+        id="quizProgressFill"
+      ></div>
+
+    </div>
+
+
+    <article class="question-card">
+
+      <span id="quizCategoryLabel"></span>
+
+      <h3 id="quizQuestion">
+        Question
+      </h3>
+
+      <div id="quizOptions"></div>
+
+      <div id="quizFeedback"></div>
+
+      <button
+        id="nextQuestion"
+        class="primary-btn quiz-next hidden"
+        type="button"
+      >
+        Next Question →
+      </button>
+
+    </article>
+
+  </div>
+
+
+  <div
+    id="quizResult"
+    class="quiz-result hidden"
+  >
+
+    <div class="result-icon">
+      🏆
+    </div>
+
+    <p class="eyebrow">
+      QUIZ COMPLETE
+    </p>
+
+    <h2 id="finalScore">
+      0/100
+    </h2>
+
+    <p id="resultMessage">
+      Keep learning.
+    </p>
+
+
+    <div class="result-stats">
+
+      <div>
+
+        <strong id="correctAnswers">
+          0
+        </strong>
+
+        <small>
+          Correct
+        </small>
+
+      </div>
+
+
+      <div>
+
+        <strong id="wrongAnswers">
+          0
+        </strong>
+
+        <small>
+          Wrong
+        </small>
+
+      </div>
+
+
+      <div>
+
+        <strong id="percentage">
+          0%
+        </strong>
+
+        <small>
+          Score
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <button
+      id="restartQuiz"
+      class="primary-btn"
+      type="button"
+    >
+      Try Again
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- TASBIH -->
+
+<section
+  id="tasbih"
+  class="page"
+>
+
+  <div class="tasbih-container">
+
+    <p class="eyebrow">
+      DHIKR COUNTER
+    </p>
+
+    <h2>
+      Digital Tasbih
+    </h2>
+
+    <div class="tasbih-circle">
+
+      <span id="tasbihNumber">
+        0
+      </span>
+
+      <small>
+        remembrances
+      </small>
+
+    </div>
+
+
+    <button
+      id="tasbihButton"
+      class="tasbih-button"
+      type="button"
+    >
+      Tap to Count
+    </button>
+
+
+    <button
+      id="resetTasbih"
+      class="secondary-btn"
+      type="button"
+    >
+      Reset
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- BOOKMARKS -->
+
+<section
+  id="bookmarks"
+  class="page"
+>
+
+  <div class="page-header">
+
+    <div>
+
+      <p class="eyebrow">
+        SAVED CONTENT
+      </p>
+
+      <h2>
+        Your Bookmarks
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="bookmarkList"
+    class="bookmark-list"
+  >
+
+    <div class="empty-state">
+
+      <span>
+        🔖
+      </span>
+
+      <h3>
+        No saved content yet
+      </h3>
+
+      <p>
+        Save an ayah to see it here.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+  <span>
+    © 2026 <strong>Know About Islam</strong>
+  </span>
+
+  <span>
+    Learn • Reflect • Grow
+  </span>
+
+</footer>
+
+
+<nav
+  class="bottom-nav"
+  aria-label="Mobile navigation"
+>
+
+  <button
+    class="nav-item active"
+    data-section="home"
+    type="button"
+  >
+    <span>⌂</span>
+    Home
+  </button>
+
+  <button
+    class="nav-item"
+    data-section="quran"
+    type="button"
+  >
+    <span>📖</span>
+    Qur'an
+  </button>
+
+  <button
+    class="nav-item"
+    data-section="hadith"
+    type="button"
+  >
+    <span>📜</span>
+    Hadith
+  </button>
+
+  <button
+    class="nav-item"
+    data-section="quiz"
+    type="button"
+  >
+    <span>🎯</span>
+    Quiz
+  </button>
+
+  <button
+    class="nav-item"
+    data-section="adhkar"
+    type="button"
+  >
+    <span>🤲</span>
+    Adhkar
+  </button>
+
+</nav>
+
+
 <script src="app.js"></script>
+
 <script src="hadith.js"></script>
+
 <script src="app-v2.js"></script>
 
 </body>
