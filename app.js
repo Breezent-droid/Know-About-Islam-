@@ -307,107 +307,475 @@ document
   });
 
 
-/* ---------- HADITH ---------- */
+/* =========================================================
+   HADITH LIBRARY — API POWERED
+   ========================================================= */
 
-const hadithData = [
+const HADITH_API =
+  "https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1";
 
-  {
-    title: "Actions are judged by intentions",
-    text: "The Messenger of Allah ﷺ taught that actions are judged according to intentions.",
-    source: "Sahih al-Bukhari 1; Sahih Muslim 1907",
-    topic: "Intentions"
+
+let hadithCurrentEdition = "eng-bukhari";
+let hadithCurrentData = [];
+
+
+/* ---------- HADITH EDITIONS ---------- */
+
+const hadithEditions = {
+
+  bukhari: {
+    english: "eng-bukhari",
+    arabic: "ara-bukhari",
+    name: "Sahih al-Bukhari"
   },
 
-  {
-    title: "Seeking knowledge",
-    text: "Seeking beneficial knowledge is among the great paths of learning and worship.",
-    source: "Use the verified hadith reference in the production database.",
-    topic: "Knowledge"
+  muslim: {
+    english: "eng-muslim",
+    arabic: "ara-muslim",
+    name: "Sahih Muslim"
   },
 
-  {
-    title: "Mercy",
-    text: "The Prophet ﷺ taught the importance of mercy and compassion.",
-    source: "Use the verified hadith reference in the production database.",
-    topic: "Character"
+  abudawud: {
+    english: "eng-abudawud",
+    arabic: "ara-abudawud",
+    name: "Sunan Abu Dawud"
+  },
+
+  tirmidhi: {
+    english: "eng-tirmidhi",
+    arabic: "ara-tirmidhi",
+    name: "Jami' at-Tirmidhi"
+  },
+
+  nasai: {
+    english: "eng-nasai",
+    arabic: "ara-nasai",
+    name: "Sunan an-Nasa'i"
+  },
+
+  ibnmajah: {
+    english: "eng-ibnmajah",
+    arabic: "ara-ibnmajah",
+    name: "Sunan Ibn Majah"
+  },
+
+  malik: {
+    english: "eng-malik",
+    arabic: "ara-malik",
+    name: "Muwatta Malik"
   }
 
-];
+};
 
 
-function renderHadith(search = "") {
+/* ---------- LOAD HADITH COLLECTION ---------- */
+
+async function loadHadithCollection(
+  edition = "eng-bukhari"
+) {
 
   const container =
     document.getElementById("hadithList");
 
-  const filtered =
-    hadithData.filter(hadith =>
+  if (!container) return;
 
-      `${hadith.title}
-       ${hadith.text}
-       ${hadith.topic}`
-      .toLowerCase()
-      .includes(search.toLowerCase())
 
+  container.innerHTML = `
+    <div class="progress-card"
+         style="text-align:center;padding:25px;">
+      📚 Loading Hadith collection...
+    </div>
+  `;
+
+
+  try {
+
+    const response =
+      await fetch(
+        `${HADITH_API}/editions/${edition}.json`
+      );
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        "Hadith collection could not be loaded."
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    hadithCurrentData =
+      result.hadiths || [];
+
+
+    hadithCurrentEdition =
+      edition;
+
+
+    renderHadithAPI(
+      hadithCurrentData
     );
 
-  container.innerHTML = "";
 
-  filtered.forEach(hadith => {
+    console.log(
+      `Hadith API loaded: ${hadithCurrentData.length} Hadith`
+    );
 
-    const card =
-      document.createElement("article");
 
-    card.className = "hadith-card";
+  } catch (error) {
 
-    card.innerHTML = `
+    console.error(
+      "Hadith API error:",
+      error
+    );
 
-      <span class="card-label">
-        ${hadith.topic}
-      </span>
 
-      <h3>${hadith.title}</h3>
+    container.innerHTML = `
+      <div class="progress-card"
+           style="text-align:center;padding:25px;">
 
-      <p class="translation">
-        ${hadith.text}
-      </p>
+        <h3>⚠️ Unable to load Hadith</h3>
 
-      <div class="hadith-source">
-        📚 ${hadith.source}
+        <p style="color:var(--muted);margin-top:10px;">
+          Please check your internet connection
+          and try again.
+        </p>
+
       </div>
-
     `;
 
-    container.appendChild(card);
-
-  });
+  }
 
 }
 
 
-document
-  .getElementById("hadithSearch")
-  .addEventListener("input", event => {
+/* ---------- RENDER HADITH ---------- */
 
-    renderHadith(event.target.value);
+function renderHadithAPI(
+  hadiths
+) {
 
-  });
+  const container =
+    document.getElementById(
+      "hadithList"
+    );
 
 
-document
-  .getElementById("randomHadith")
-  .addEventListener("click", () => {
+  if (!container) return;
 
-    const random =
-      hadithData[
-        Math.floor(
-          Math.random() * hadithData.length
-        )
-      ];
 
-    renderHadith(random.title);
+  if (!hadiths.length) {
 
-  });
+    container.innerHTML = `
+      <div class="progress-card"
+           style="text-align:center;padding:25px;">
+
+        🔎 No Hadith found.
+
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML = "";
+
+
+  hadiths.forEach(
+    hadith => {
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+
+      card.className =
+        "hadith-card";
+
+
+      const hadithNumber =
+        hadith.hadithnumber ||
+        hadith.number ||
+        "";
+
+
+      const arabicText =
+        hadith.text || "";
+
+
+      card.innerHTML = `
+
+        <div class="ayah-top">
+
+          <span class="card-label">
+            ${hadithCurrentEdition}
+          </span>
+
+          <button
+            class="bookmark-small"
+            type="button"
+            data-hadith-bookmark="${hadithNumber}">
+
+            🔖
+
+          </button>
+
+        </div>
+
+
+        <div
+          class="hadith-arabic"
+          dir="rtl"
+          style="
+            font-size:1.35rem;
+            line-height:2;
+            margin:18px 0;
+            text-align:right;
+          "
+        >
+
+          ${arabicText}
+
+        </div>
+
+
+        <div class="hadith-source">
+
+          📚 Hadith ${hadithNumber}
+
+        </div>
+
+      `;
+
+
+      container.appendChild(
+        card
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   HADITH SEARCH
+   ========================================================= */
+
+function searchHadithAPI() {
+
+  const input =
+    document.getElementById(
+      "hadithSearch"
+    );
+
+
+  if (!input) return;
+
+
+  const query =
+    input.value
+      .trim()
+      .toLowerCase();
+
+
+  if (!query) {
+
+    renderHadithAPI(
+      hadithCurrentData
+    );
+
+    return;
+
+  }
+
+
+  const results =
+    hadithCurrentData.filter(
+      hadith => {
+
+        const text =
+          String(
+            hadith.text || ""
+          )
+          .toLowerCase();
+
+
+        return text.includes(
+          query
+        );
+
+      }
+    );
+
+
+  renderHadithAPI(
+    results
+  );
+
+}
+
+
+/* =========================================================
+   HADITH SEARCH EVENT
+   ========================================================= */
+
+const hadithSearchInput =
+  document.getElementById(
+    "hadithSearch"
+  );
+
+
+if (hadithSearchInput) {
+
+  hadithSearchInput.addEventListener(
+    "input",
+    searchHadithAPI
+  );
+
+}
+
+
+/* =========================================================
+   HADITH COLLECTION SELECTOR
+   ========================================================= */
+
+const hadithCollectionSelect =
+  document.getElementById(
+    "hadithCollection"
+  );
+
+
+if (hadithCollectionSelect) {
+
+  hadithCollectionSelect.addEventListener(
+    "change",
+    event => {
+
+      const selected =
+        event.target.value;
+
+
+      const edition =
+        hadithEditions[selected]
+          ?.english ||
+        "eng-bukhari";
+
+
+      loadHadithCollection(
+        edition
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   RANDOM HADITH
+   ========================================================= */
+
+const randomHadithButton =
+  document.getElementById(
+    "randomHadith"
+  );
+
+
+if (randomHadithButton) {
+
+  randomHadithButton.addEventListener(
+    "click",
+    () => {
+
+      if (
+        !hadithCurrentData.length
+      ) return;
+
+
+      const random =
+        hadithCurrentData[
+          Math.floor(
+            Math.random() *
+            hadithCurrentData.length
+          )
+        ];
+
+
+      renderHadithAPI([
+        random
+      ]);
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   HADITH BOOKMARKS
+   ========================================================= */
+
+document.addEventListener(
+  "click",
+  event => {
+
+    const button =
+      event.target.closest(
+        "[data-hadith-bookmark]"
+      );
+
+
+    if (!button) return;
+
+
+    const number =
+      button.dataset.hadithBookmark;
+
+
+    const hadith =
+      hadithCurrentData.find(
+        item =>
+          String(
+            item.hadithnumber ||
+            item.number ||
+            ""
+          ) === String(number)
+      );
+
+
+    if (!hadith) return;
+
+
+    saveBookmark(
+      `Hadith ${number}`,
+      hadith.text || ""
+    );
+
+
+    button.textContent =
+      "🔖✓";
+
+  }
+);
+
+
+/* =========================================================
+   START HADITH
+   ========================================================= */
+
+loadHadithCollection(
+  "eng-bukhari"
+);
+
 
 
 /* ---------- FIQH ---------- */
