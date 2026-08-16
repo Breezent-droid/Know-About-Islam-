@@ -663,35 +663,67 @@
 
 <!-- HADITH -->
 
-<section
-  id="hadith"
-  class="page"
->
+<section id="hadith" class="page">
 
   <div class="page-header">
 
     <div>
-
-      <p class="eyebrow">
-        SUNNAH
-      </p>
-
-      <h2>
-        Hadith Library
-      </h2>
-
+      <p class="eyebrow">SUNNAH</p>
+      <h2>Hadith Library</h2>
     </div>
 
     <button
       class="secondary-btn"
       id="randomHadith"
-      type="button"
-    >
+      type="button">
       🎲 Random
     </button>
 
   </div>
 
+
+  <!-- HADITH COLLECTION -->
+
+  <div class="search-box">
+
+    <select
+      id="hadithCollection"
+      aria-label="Select Hadith collection">
+
+      <option value="bukhari">
+        Sahih al-Bukhari
+      </option>
+
+      <option value="muslim">
+        Sahih Muslim
+      </option>
+
+      <option value="abudawud">
+        Sunan Abu Dawud
+      </option>
+
+      <option value="tirmidhi">
+        Jami' at-Tirmidhi
+      </option>
+
+      <option value="nasai">
+        Sunan an-Nasa'i
+      </option>
+
+      <option value="ibnmajah">
+        Sunan Ibn Majah
+      </option>
+
+      <option value="malik">
+        Muwatta Malik
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <!-- HADITH SEARCH -->
 
   <div class="search-box">
 
@@ -699,25 +731,30 @@
       id="hadithSearch"
       type="search"
       placeholder="Search Hadith..."
-    >
+      autocomplete="off">
 
   </div>
 
+
+  <!-- HADITH RESULTS -->
 
   <div id="hadithList"></div>
 
 
+  <!-- SOURCE NOTE -->
+
   <div class="info-note">
 
-    <strong>Source note:</strong>
-    Some entries in the current app are
-    placeholders pending verified
-    production references.
+    <strong>Hadith source:</strong>
+
+    Hadith are loaded from the selected
+    collection through the connected Hadith API.
+    Always verify detailed religious matters
+    with reliable scholarly sources.
 
   </div>
 
 </section>
-
 
 <!-- FIQH -->
 
